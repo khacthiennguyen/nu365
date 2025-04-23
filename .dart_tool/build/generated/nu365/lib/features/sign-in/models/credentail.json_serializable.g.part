@@ -1,0 +1,26 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+Credential _$CredentialFromJson(Map<String, dynamic> json) => Credential(
+      message: json['message'] as String?,
+      session: Session.fromJson(json['session'] as Map<String, dynamic>),
+      user: User.fromJson(json['user'] as Map<String, dynamic>),
+    );
+
+Map<String, dynamic> _$CredentialToJson(Credential instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'session': instance.session.toJson(),
+      'user': instance.user.toJson(),
+    };
+
+Session _$SessionFromJson(Map<String, dynamic> json) => Session(
+      accessToken: json['access_token'] as String,
+      expiresAt: (json['expires_at'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$SessionToJson(Session instance) => <String, dynamic>{
+      'access_token': instance.accessToken,
+      'expires_at': instance.expiresAt,
+    };

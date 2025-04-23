@@ -1,0 +1,46 @@
+import 'package:json_annotation/json_annotation.dart';
+import 'package:nu365/features/sign-in/models/user.dart';
+
+part '../../../generated/features/sign-in/models/credentail.g.dart';
+
+@JsonSerializable(explicitToJson: true)
+class Credential {
+  @JsonKey(name: 'message')
+  final String? message; // Changed to nullable to handle null values
+
+  @JsonKey(name: 'session')
+  final Session session;
+
+  @JsonKey(name: 'user')
+  final User user;
+
+  const Credential({
+    this.message, // Updated to allow null
+    required this.session,
+    required this.user,
+  });
+
+  factory Credential.fromJson(Map<String, dynamic> json) =>
+      _$CredentialFromJson(json);
+
+  Map<String, dynamic> toJson() => _$CredentialToJson(this);
+}
+
+@JsonSerializable(explicitToJson: true)
+class Session {
+  @JsonKey(name: 'access_token')
+  final String accessToken;
+
+  @JsonKey(name: 'expires_at')
+  final int expiresAt;
+
+  const Session({
+    required this.accessToken,
+    required this.expiresAt,
+  });
+
+  factory Session.fromJson(Map<String, dynamic> json) =>
+      _$SessionFromJson(json);
+
+  Map<String, dynamic> toJson() => _$SessionToJson(this);
+}
