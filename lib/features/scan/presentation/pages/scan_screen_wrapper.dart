@@ -13,7 +13,6 @@ class ScanScreenWrapper extends StatefulWidget {
 }
 
 class _ScanScreenWrapperState extends State<ScanScreenWrapper> {
-  // Tạo Bloc ở cấp cao nhất
   late final ScanBloc _scanBloc;
 
   @override
@@ -35,30 +34,20 @@ class _ScanScreenWrapperState extends State<ScanScreenWrapper> {
       create: (context) => _scanBloc,
       child: BlocListener<ScanBloc, ScanState>(
         listener: (context, state) {
-          if (state is ScanSuccess && state.prediction.isNotEmpty) {
-             print("state.prediction.length: ${state.prediction.length}");
+          if (state is ScanSuccess ) {
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (context) => BlocProvider.value(
                   value: _scanBloc,
                   child: ScanResultsScreen(
                     imageFile: state.imageFile,
-                    predictions: state.prediction,
+                    predictions: state.predictions,
                   ),
                 ),
               ),
             );
           }
-     
-         
-          if (state is ScanSuccess && state.prediction.isEmpty) {
-           
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('Cannot detect anything in this image'),
-              ),
-            );
-          }
+
           if (state is ScanFailure) {
             ScaffoldMessenger.of(context).showSnackBar(
               SnackBar(
