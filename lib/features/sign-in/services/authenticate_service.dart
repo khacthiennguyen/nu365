@@ -3,6 +3,8 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:nu365/core/api/dio/dio.dart' show dio;
 import 'package:nu365/core/api/utils/base_response.dart';
+import 'package:nu365/core/data/local/data_local.dart';
+import 'package:nu365/core/data/runtime/runtime_memory_storage.dart';
 import 'package:nu365/features/sign-in/logic/login_state.dart';
 import 'package:nu365/features/sign-in/models/credentail.dart';
 
@@ -11,20 +13,33 @@ class AuthenticateService {
     try {
       BaseResponse response = BaseResponse.fromDIOResponse(await dio
           .post("auth/login", data: {"email": email, "password": password}));
-      // print('Response payload: ${response.payload}');
-      // print('Response payload type: ${response.payload.runtimeType}');
-
-      // // If payload is a Map, print its keys to help with debugging
-      // if (response.payload is Map) {
-      //   print('Payload keys: ${(response.payload as Map).keys.toList()}');
-      // }
       if (response.httpStatus == 200) {
         if (response.payload == null) {
           return LoginFailed(message: "Invalid response from server");
         }
         try {
+        Credential credential = Credential.fromJson(response.payload);
+        //  print(credential.toJson().toString());
+          String uId = credential.user.id;
+          String username = credential.user.name;
+          String accessToken = credential.session.accessToken;
+          String expiredAt = credential.session.expiresAt.toString();
+          // print("full ifo: $uId, $username, $accessToken, $expiredAt");
+          await SQLite.saveSession(
+              uId: uId,
+              username: username,
+              accessToken: accessToken,
+              expiredAt: expiredAt);
+          // Save user information to local storage
+        RuntimeMemoryStorage.setSession (
+            uId: uId, 
+            username: username, 
+            accessToken: accessToken, 
+            expiredAt: expiredAt
+        );
+
           return LoginSuccess(
-              credential: Credential.fromJson(response.payload));
+              credential: credential); // Return the credential object);
         } catch (e) {
           return LoginFailed(message: "Failed to parse credentials");
         }
@@ -62,4 +77,5 @@ class AuthenticateService {
       return LoginFailed(error: error as Exception, message: error.toString());
     }
   }
+
 }

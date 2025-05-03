@@ -47,9 +47,8 @@ class _DividerWithText extends StatelessWidget {
   final String text;
 
   const _DividerWithText({
-    Key? key,
     required this.text,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

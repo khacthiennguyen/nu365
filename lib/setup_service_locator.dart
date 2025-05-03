@@ -1,10 +1,13 @@
 import 'package:get_it/get_it.dart';
-import 'package:nu365/core/data/objectbox_service.dart';
-
+import 'package:nu365/core/data/supabase/supabase_service.dart';
 
 
 final GetIt sl = GetIt.instance;
 
 void setupServiceLocator() {
-  sl.registerSingleton<ObjectBoxService>(ObjectBoxImpl());
+  // Register your services here
+  // Example: sl.registerLazySingleton<SomeService>(() => SomeService()); 
+
+  sl.registerLazySingleton<SupabaseService>(() => SupabaseService());
+ 
 }

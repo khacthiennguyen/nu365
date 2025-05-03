@@ -7,14 +7,12 @@ part of '../../../../features/sign-in/models/credentail.dart';
 // **************************************************************************
 
 Credential _$CredentialFromJson(Map<String, dynamic> json) => Credential(
-      message: json['message'] as String?,
       session: Session.fromJson(json['session'] as Map<String, dynamic>),
       user: User.fromJson(json['user'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$CredentialToJson(Credential instance) =>
     <String, dynamic>{
-      'message': instance.message,
       'session': instance.session.toJson(),
       'user': instance.user.toJson(),
     };

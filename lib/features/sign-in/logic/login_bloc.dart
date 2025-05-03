@@ -8,7 +8,6 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   LoginBloc() : super(LoginInitial()) {
     on<LoginSubmittedEvent>((event, emit) async {
       emit(LoginLoading());
-      print(await AuthenticateService.login(event.username, event.password));
       emit(await AuthenticateService.login(event.username, event.password));
     });
   }

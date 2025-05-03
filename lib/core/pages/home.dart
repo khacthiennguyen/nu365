@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nu365/core/constants/colors.dart';
-import 'package:nu365/core/constants/images.dart';
+import 'package:nu365/core/data/local/data_local.dart';
+import 'package:nu365/core/data/runtime/runtime_memory_storage.dart';
 import 'package:nu365/core/states/authenticate/authenticate_bloc.dart';
 import 'package:nu365/core/states/authenticate/authenticate_event.dart';
 import 'package:nu365/core/states/authenticate/authenticate_state.dart';
-import 'package:nu365/core/widgets/app_text.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class StartUpPage extends StatelessWidget {
   const StartUpPage({super.key});
@@ -16,33 +15,54 @@ class StartUpPage extends StatelessWidget {
     GoRouter goRouter = GoRouter.of(context);
 
     context.read<AuthenticateBloc>().stream.listen((state) {
-
       if (state is AuthenticateAuthenticated) {
-        goRouter.go("/manage-account");
+        goRouter.go("/dashboard");
         return;
       }
-
       goRouter.go("/sign-in");
       return;
     });
   }
 
   _loadAuthenticateState(BuildContext context) async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? accessToken = prefs.getString('accessToken');
-    if(!context.mounted){
-      return;
-    }
+    try {
+      // Sử dụng getDatabase() để đảm bảo database đã được khởi tạo
+      final db = await SQLite.getDatabase();
+      List result = await db.query("Session");
 
-    if(accessToken == null) {
+      if (!context.mounted) {
+        return;
+      }
 
-      context.read<AuthenticateBloc>().add(AuthenticateLoggedOut());
-      return;
-    }
+      if (result.isEmpty) {
+        // print("No session found, redirecting to login");
+        context.read<AuthenticateBloc>().add(AuthenticateLoggedOut());
+        return;
+      }
 
-    if (context.mounted) {
+      DateTime expiredAt = DateTime.parse(result.first["expiredAt"]);
+
+      if (DateTime.now().isAfter(expiredAt)) {
+        // print("Session expired, redirecting to login");
+        context.read<AuthenticateBloc>().add(AuthenticateLoggedOut());
+        await db.delete("Session");
+        return;
+      }
+
+      String accessToken = result.first["accessToken"];
+      String username = result.first["username"];
+      String uId = result.first["uId"];
+      RuntimeMemoryStorage.setSession(
+          uId: uId,
+          username: username,
+          accessToken: accessToken,
+          expiredAt: expiredAt.toString());
+      // print("Valid session found, logging in with token");
       context.read<AuthenticateBloc>().add(AuthenticateLoggedIn(accessToken));
-      return;
+    } catch (e) {
+      if (context.mounted) {
+        context.read<AuthenticateBloc>().add(AuthenticateLoggedOut());
+      }
     }
   }
 
@@ -58,14 +78,11 @@ class StartUpPage extends StatelessWidget {
       builder: (BuildContext context, state) {
         return Container(
           color: AppColor.darkBlue,
-          child: Padding(
-              padding: const EdgeInsets.all(16.0),
+          child: const Padding(
+              padding: EdgeInsets.all(16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                
-                
-                ],
+                children: [],
               )),
         );
       },

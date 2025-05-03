@@ -11,12 +11,12 @@ class LoginForm extends StatelessWidget {
   final VoidCallback onForgotPasswordPressed;
 
   const LoginForm({
-    Key? key,
+    super.key,
     required this.emailController,
     required this.passwordController,
     required this.onLoginPressed,
     required this.onForgotPasswordPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

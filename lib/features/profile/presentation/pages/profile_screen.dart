@@ -1,63 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nu365/core/constants/app_theme.dart';
+import 'package:nu365/core/data/local/data_local.dart';
+import 'package:nu365/core/data/runtime/runtime_memory_storage.dart';
+import 'package:nu365/features/profile/presentation/widgets/logout_button.dart';
+import 'package:nu365/features/profile/presentation/widgets/profile_infomation.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  ProfileScreen({super.key});
+
+  final info = RuntimeMemoryStorage.get('session');
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Column(
         children: [
-          // Profile avatar
-          Center(
-            child: Column(
-              children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  padding: const EdgeInsets.all(4),
-                  decoration: const BoxDecoration(
-                    gradient: AppTheme.primaryGradient,
-                    shape: BoxShape.circle,
-                  ),
-                  child: Container(
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Center(
-                      child: Text(
-                        'KT',
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.bold,
-                          color: AppTheme.textPrimary,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Khac Thien',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const Text(
-                  'khacthien@example.com',
-                  style: TextStyle(
-                    color: AppTheme.textSecondary,
-                  ),
-                ),
-              ],
-            ),
+          // Profile Inffo
+          ProfileInformation(
+            userName: info['username']!,
+            uId: info['uId']!,
           ),
           const SizedBox(height: 32),
-          
           // Profile menu items
           Card(
             child: Column(
@@ -88,28 +52,15 @@ class ProfileScreen extends StatelessWidget {
               ],
             ),
           ),
-          
+
           const SizedBox(height: 24),
-          
           // Logout button
-          SizedBox(
-            width: double.infinity,
-            child: OutlinedButton.icon(
-              onPressed: () {
-                context.go('/sign-in');
-              },
-              icon: const Icon(Icons.logout, color: Colors.red),
-              label: const Text(
-                'Logout',
-                style: TextStyle(color: Colors.red),
-              ),
-            ),
-          ),
+          LogoutButton(),
         ],
       ),
     );
   }
-  
+
   Widget _buildMenuItem({
     required IconData icon,
     required String title,

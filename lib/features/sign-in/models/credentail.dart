@@ -5,9 +5,6 @@ part '../../../generated/features/sign-in/models/credentail.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Credential {
-  @JsonKey(name: 'message')
-  final String? message; // Changed to nullable to handle null values
-
   @JsonKey(name: 'session')
   final Session session;
 
@@ -15,7 +12,6 @@ class Credential {
   final User user;
 
   const Credential({
-    this.message, // Updated to allow null
     required this.session,
     required this.user,
   });
