@@ -10,6 +10,7 @@ import 'package:nu365/features/scan/presentation/widgets/scan_results_actions.da
 import 'package:nu365/features/scan/presentation/widgets/scan_results_tabs.dart';
 import 'package:nu365/features/scan/services/result_scan_service.dart';
 import 'package:nu365/setup_service_locator.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class ScanResultsScreen extends StatefulWidget {
   final List<Prediction> predictions;
@@ -93,8 +94,116 @@ class _ScanResultsScreenState extends State<ScanResultsScreen> {
       },
       builder: (context, state) {
         if (state is ScanLoading) {
-          return const Scaffold(
-            body: Center(child: CircularProgressIndicator()),
+          // Thay thế CircularProgressIndicator bằng Skeletonizer
+          return Scaffold(
+            body: Skeletonizer(
+              enabled: true,
+              child: Column(
+                children: [
+                  // Skeleton cho hình ảnh thức ăn
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      width: screenWidth * 0.3,
+                      height: screenWidth * 0.3,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.grey[300],
+                      ),
+                    ),
+                  ),
+
+                  // Skeleton cho tab kết quả
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Tab navigation
+                          Row(
+                            children: [
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                decoration: BoxDecoration(
+                                  border: Border(
+                                    bottom: BorderSide(
+                                      color: Theme.of(context).primaryColor,
+                                      width: 2,
+                                    ),
+                                  ),
+                                ),
+                                child: const Text(
+                                  'Dinh dưỡng',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 16, vertical: 8),
+                                child: const Text(
+                                  'Thành phần',
+                                ),
+                              ),
+                            ],
+                          ),
+
+                          const SizedBox(height: 24),
+
+                          // Nutrition content skeleton
+                          Text(
+                            'Thông tin dinh dưỡng',
+                            style: Theme.of(context)
+                                .textTheme
+                                .titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                          ),
+                          const SizedBox(height: 16),
+
+                          ...List.generate(
+                            4,
+                            (index) => Padding(
+                              padding: const EdgeInsets.only(bottom: 12.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Thông tin dinh dưỡng ${index + 1}'),
+                                  Text('${(index + 1) * 100} kcal'),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+
+                  // Skeleton cho action buttons
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        ElevatedButton(
+                          onPressed: null,
+                          child: const Text('Quay lại'),
+                        ),
+                        ElevatedButton(
+                          onPressed: null,
+                          child: const Text('Lưu'),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
           );
         }
 
@@ -109,8 +218,78 @@ class _ScanResultsScreenState extends State<ScanResultsScreen> {
 
               // Tab view with nutrition and ingredients
               isLoading || foodInfoList == null
-                  ? const Expanded(
-                      child: Center(child: CircularProgressIndicator()))
+                  ? Expanded(
+                      // Thay thế CircularProgressIndicator cho loading kết quả chi tiết
+                      child: Skeletonizer(
+                      enabled: true,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Tab navigation skeleton
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  decoration: BoxDecoration(
+                                    border: Border(
+                                      bottom: BorderSide(
+                                        color: Theme.of(context).primaryColor,
+                                        width: 2,
+                                      ),
+                                    ),
+                                  ),
+                                  child: const Text(
+                                    'Dinh dưỡng',
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 16, vertical: 8),
+                                  child: const Text(
+                                    'Thành phần',
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            const SizedBox(height: 24),
+
+                            // Nutrition content skeleton
+                            Text(
+                              'Thông tin dinh dưỡng',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            const SizedBox(height: 16),
+
+                            ...List.generate(
+                              4,
+                              (index) => Padding(
+                                padding: const EdgeInsets.only(bottom: 12.0),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Thông tin dinh dưỡng ${index + 1}'),
+                                    Text('${(index + 1) * 100} kcal'),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ))
                   : ScanResultsTabs(
                       nutrition: foodInfoList!,
                       predictions: widget.predictions,

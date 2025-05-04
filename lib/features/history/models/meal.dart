@@ -1,6 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:nu365/features/history/models/food_item.dart';
-
 part '../../../generated/features/history/models/meal.g.dart';
 
 @JsonSerializable(explicitToJson: true)
@@ -78,7 +77,9 @@ class MealModel {
       0;
 
   double get calculatedTotalFat =>
-      food_items?.fold(0, (sum, item) => sum! + item.totalFat) ?? total_fat ?? 0;
+      food_items?.fold(0, (sum, item) => sum! + item.totalFat) ??
+      total_fat ??
+      0;
 
   double get calculatedTotalCarb =>
       food_items?.fold(0, (sum, item) => sum! + item.totalCarb) ??

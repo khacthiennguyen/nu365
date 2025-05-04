@@ -7,6 +7,7 @@ import 'package:nu365/features/history/logic/history_state.dart';
 import 'package:nu365/features/history/models/meal.dart';
 import 'package:nu365/features/history/presention/pages/meal_detals.dart';
 import 'package:nu365/features/history/presention/widgets/index.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key});
@@ -17,7 +18,10 @@ class HistoryScreen extends StatelessWidget {
       create: (context) => HistoryBloc()..add(const LoadHistoryEvent()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Lịch sử bữa ăn đã lưu',style: TextStyle(fontWeight: FontWeight.bold),),
+          title: const Text(
+            'Lịch sử bữa ăn đã lưu',
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
           actions: [
             BlocBuilder<HistoryBloc, HistoryState>(
               builder: (context, state) {
@@ -40,7 +44,45 @@ class HistoryScreen extends StatelessWidget {
           child: BlocBuilder<HistoryBloc, HistoryState>(
             builder: (context, state) {
               if (state is HistoryLoading) {
-                return const Center(child: CircularProgressIndicator());
+                // Replace CircularProgressIndicator with Skeletonizer
+                return Skeletonizer(
+                  enabled: true,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(16),
+                    itemCount: 3, // Số ngày giả lập
+                    itemBuilder: (context, dateIndex) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8.0),
+                            child: Text(
+                              'Loading date...',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ),
+                          // Hiển thị 2 meal skeleton cho mỗi ngày
+                          ...List.generate(
+                            2,
+                            (index) => MealCard(
+                              meal: MealModel(
+                                meal_id: 'skeleton-$index',
+                                meal_time: DateTime.now(),
+                              ),
+                              onTap: () {},
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                        ],
+                      );
+                    },
+                  ),
+                );
               } else if (state is HistoryLoaded) {
                 if (state.meals.isEmpty) {
                   return const Center(

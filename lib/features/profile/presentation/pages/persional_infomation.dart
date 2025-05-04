@@ -11,6 +11,7 @@ import 'package:nu365/features/profile/presentation/widgets/nutrition_goals_sect
 import 'package:nu365/features/profile/presentation/widgets/personal_info_section.dart';
 import 'package:nu365/features/profile/presentation/widgets/profile_header.dart';
 import 'package:nu365/features/profile/presentation/widgets/save_button.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class PersionalInfomation extends StatefulWidget {
   const PersionalInfomation({super.key});
@@ -166,7 +167,113 @@ class _PersionalInfomationState extends State<PersionalInfomation> {
               BlocBuilder<SettingsBloc, SettingsState>(
                 builder: (context, state) {
                   if (state is SettingsLoading) {
-                    return const Center(child: CircularProgressIndicator());
+                    // Thay CircularProgressIndicator bằng Skeletonizer
+                    return Skeletonizer(
+                      enabled: true,
+                      child: SingleChildScrollView(
+                        padding:
+                            const EdgeInsets.fromLTRB(16.0, 60.0, 16.0, 16.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            // Skeleton cho ProfileHeader
+                            Center(
+                              child: Column(
+                                children: [
+                                  CircleAvatar(
+                                    radius: 50,
+                                    backgroundColor:
+                                        AppTheme.primaryPurple.withOpacity(0.2),
+                                    child: const Text(
+                                      'U',
+                                      style: TextStyle(
+                                        fontSize: 40,
+                                        fontWeight: FontWeight.bold,
+                                        color: AppTheme.primaryPurple,
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(height: 16),
+                                  const Text(
+                                    'Tên Người Dùng',
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    'ID: 123456789',
+                                    style: TextStyle(
+                                      color: Colors.grey[600],
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4),
+                                  Text(
+                                    'Thành viên từ 01/01/2023',
+                                    style: TextStyle(
+                                      color: Colors.grey[600],
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+
+                            const SizedBox(height: 24),
+
+                            // Skeleton cho PersonalInfoSection
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Thông tin cá nhân',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                _buildInfoItem(
+                                    context, 'Email', 'email@example.com'),
+                                const SizedBox(height: 12),
+                                _buildInfoItem(
+                                    context, 'Ngày sinh', '01/01/1990'),
+                              ],
+                            ),
+
+                            const SizedBox(height: 24),
+
+                            // Skeleton cho NutritionGoalsSection
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                const Text(
+                                  'Mục tiêu dinh dưỡng',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 16),
+                                _buildNutritionItem(
+                                    context, 'Calories', '2000', 'kcal'),
+                                const SizedBox(height: 12),
+                                _buildNutritionItem(
+                                    context, 'Protein', '100', 'g'),
+                                const SizedBox(height: 12),
+                                _buildNutritionItem(
+                                    context, 'Chất béo', '70', 'g'),
+                                const SizedBox(height: 12),
+                                _buildNutritionItem(
+                                    context, 'Carbs', '250', 'g'),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
                   } else if (state is LoadInfoUserSuccess) {
                     if (!_isEditMode && _currentUserInfo == null) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -187,7 +294,7 @@ class _PersionalInfomationState extends State<PersionalInfomation> {
                   return const Center(child: Text('Không có dữ liệu'));
                 },
               ),
-              
+
               // Nút quay lại ở góc trên bên trái
               Positioned(
                 top: 16,
@@ -207,35 +314,35 @@ class _PersionalInfomationState extends State<PersionalInfomation> {
                   ),
                 ),
               ),
-              
+
               // Nút chỉnh sửa ở góc trên bên phải
               BlocBuilder<SettingsBloc, SettingsState>(
                 builder: (context, state) {
                   if (state is LoadInfoUserSuccess) {
                     return Positioned(
-                      top: 16,
-                      right: 16,
-                      child: GestureDetector(
-                        onTap: () {
-                          if (_isEditMode) {
-                            _toggleEditMode();
-                          } else {
-                            _updateControllers(state.userInfo);
-                            _toggleEditMode();
-                          }
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(8),
-                          decoration: BoxDecoration(
-                            color: Colors.grey.withOpacity(0.1),
-                            shape: BoxShape.circle,
+                        top: 16,
+                        right: 16,
+                        child: GestureDetector(
+                          onTap: () {
+                            if (_isEditMode) {
+                              _toggleEditMode();
+                            } else {
+                              _updateControllers(state.userInfo);
+                              _toggleEditMode();
+                            }
+                          },
+                          child: Container(
+                            padding: const EdgeInsets.all(8),
+                            decoration: BoxDecoration(
+                              color: Colors.grey.withOpacity(0.1),
+                              shape: BoxShape.circle,
+                            ),
+                            child: Icon(
+                              _isEditMode ? Icons.close : Icons.edit,
+                              color: AppTheme.primaryPurple,
+                            ),
                           ),
-                          child: Icon(
-                            _isEditMode ? Icons.close : Icons.edit,
-                            color: AppTheme.primaryPurple,
-                          ),
-                        ),
-                      ));
+                        ));
                   }
                   return const SizedBox.shrink();
                 },
@@ -243,9 +350,8 @@ class _PersionalInfomationState extends State<PersionalInfomation> {
             ],
           ),
         ),
-        bottomNavigationBar: _isEditMode 
-            ? SaveButton(onSave: _saveUserInfo)
-            : null,
+        bottomNavigationBar:
+            _isEditMode ? SaveButton(onSave: _saveUserInfo) : null,
       ),
     );
   }
@@ -264,9 +370,9 @@ class _PersionalInfomationState extends State<PersionalInfomation> {
             userNameController: _userNameController,
             isEditMode: _isEditMode,
           ),
-          
+
           const SizedBox(height: 24),
-          
+
           // Sử dụng widget PersonalInfoSection
           PersonalInfoSection(
             email: userInfo.email,
@@ -275,9 +381,9 @@ class _PersionalInfomationState extends State<PersionalInfomation> {
             emailController: _emailController,
             onSelectDate: () => _selectDate(context),
           ),
-          
+
           const SizedBox(height: 24),
-          
+
           // Sử dụng widget NutritionGoalsSection
           NutritionGoalsSection(
             goalCalories: userInfo.goal_calories,
@@ -292,6 +398,52 @@ class _PersionalInfomationState extends State<PersionalInfomation> {
           ),
         ],
       ),
+    );
+  }
+
+  // Widget hỗ trợ cho skeleton UI
+  Widget _buildInfoItem(BuildContext context, String label, String value) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[600],
+          ),
+        ),
+        const SizedBox(height: 4),
+        Text(
+          value,
+          style: const TextStyle(
+            fontSize: 16,
+          ),
+        ),
+      ],
+    );
+  }
+
+  // Widget hỗ trợ cho skeleton UI cho phần dinh dưỡng
+  Widget _buildNutritionItem(
+      BuildContext context, String label, String value, String unit) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 16,
+          ),
+        ),
+        Text(
+          '$value $unit',
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ],
     );
   }
 }

@@ -4,10 +4,8 @@ import 'package:nu365/core/pages/home.dart';
 import 'package:nu365/features/dashboard/presentation/pages/dashboard.dart';
 import 'package:nu365/features/history/presention/pages/history_screen.dart';
 import 'package:nu365/features/manage_main_layout/presentation/pages/main_layout.dart';
-import 'package:nu365/features/profile/models/user_info.dart';
 import 'package:nu365/features/profile/presentation/pages/persional_infomation.dart';
 import 'package:nu365/features/profile/presentation/pages/profile_screen.dart';
-import 'package:nu365/features/profile/presentation/widgets/profile_infomation.dart';
 import 'package:nu365/features/scan/presentation/pages/scan_screen_wrapper.dart';
 import 'package:nu365/features/auth/presentation/pages/login_screen.dart';
 

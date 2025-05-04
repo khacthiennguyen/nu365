@@ -71,7 +71,7 @@
 48-->[androidx.core:core:1.13.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\8cf478dec41eed746328fa8046755ba2\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
 49        android:debuggable="true"
 50        android:extractNativeLibs="true"
-51        android:icon="@mipmap/ic_launcher"
+51        android:icon="@mipmap/launcher_icon"
 52        android:label="nu365" >
 53        <activity
 54            android:name="com.example.nu365.MainActivity"

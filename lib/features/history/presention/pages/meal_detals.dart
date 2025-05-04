@@ -7,6 +7,7 @@ import 'package:nu365/features/history/logic/history_event.dart';
 import 'package:nu365/features/history/logic/history_state.dart';
 import 'package:nu365/features/history/models/meal.dart';
 import 'package:nu365/features/history/presention/widgets/index.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class MealDetailsScreen extends StatefulWidget {
   final String mealId;
@@ -29,6 +30,7 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Meal Details'),
+        
         actions: [
           BlocBuilder<HistoryBloc, HistoryState>(
             builder: (context, state) {
@@ -46,7 +48,129 @@ class _MealDetailsScreenState extends State<MealDetailsScreen> {
       body: BlocBuilder<HistoryBloc, HistoryState>(
         builder: (context, state) {
           if (state is MealDetailLoading) {
-            return const Center(child: CircularProgressIndicator());
+            // Thay CircularProgressIndicator bằng Skeletonizer
+            return Skeletonizer(
+              enabled: true,
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Skeleton cho thời gian
+                    Text(
+                      '${DateFormat('EEEE, MMMM d, yyyy').format(DateTime.now())} at ${DateFormat('h:mm a').format(DateTime.now())}',
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+
+                    const SizedBox(height: 16),
+
+                    // Skeleton cho hình ảnh
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Container(
+                        width: double.infinity,
+                        height: 200,
+                        color: Colors.grey[300],
+                      ),
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // Skeleton cho ghi chú
+                    Text(
+                      'Note:',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      'Loading meal notes...',
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+
+                    const SizedBox(height: 20),
+
+                    // Skeleton cho bảng thông tin dinh dưỡng
+                    Text(
+                      'Nutritional Summary',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    const SizedBox(height: 8),
+                    Card(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16),
+                        child: Column(
+                          children: List.generate(
+                            4,
+                            (index) => Padding(
+                              padding: const EdgeInsets.only(bottom: 8.0),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Nutrient ${index + 1}'),
+                                  Text('${index * 100} kcal'),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    const SizedBox(height: 24),
+
+                    // Skeleton cho Food Items
+                    Text(
+                      'Food Items',
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                    const SizedBox(height: 8),
+                    ...List.generate(
+                      3,
+                      (index) => Card(
+                        margin: const EdgeInsets.only(bottom: 12),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'Food Item ${index + 1}',
+                                style: Theme.of(context).textTheme.titleMedium,
+                              ),
+                              const SizedBox(height: 8),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Calories:'),
+                                  Text('${index * 200} kcal'),
+                                ],
+                              ),
+                              const SizedBox(height: 4),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Text('Protein:'),
+                                  Text('${index * 10} g'),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
           } else if (state is MealDetailLoaded) {
             return _buildMealDetails(context, state.meal);
           } else if (state is MealDetailError) {

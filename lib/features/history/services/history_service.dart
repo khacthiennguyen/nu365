@@ -98,13 +98,13 @@ class HistoryService {
           total_calories: totalCalories,
           total_protein: totalProtein,
           total_fat: totalFat,
-          total_carb: totalCarb,
+          total_carb: totalCarb
         ));
       }
 
       return HistoryLoaded(meals: meals);
     } catch (e) {
-      print('Error loading history: $e');
+     
       return HistoryError(errorMessage: e.toString());
     }
   }
@@ -129,7 +129,7 @@ class HistoryService {
 
       return true;
     } catch (e) {
-      print('Error deleting meal: $e');
+    
       return false;
     }
   }
@@ -224,7 +224,7 @@ class HistoryService {
         total_carb: totalCarb,
       );
     } catch (e) {
-      print('Error getting meal detail: $e');
+
       return null;
     }
   }

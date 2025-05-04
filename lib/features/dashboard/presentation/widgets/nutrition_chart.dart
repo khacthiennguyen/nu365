@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class NutritionChart extends StatefulWidget {
   final Map<String, List<double>> weeklyNutrition;
 
-  const NutritionChart({Key? key, required this.weeklyNutrition})
-      : super(key: key);
+  const NutritionChart({super.key, required this.weeklyNutrition});
 
   @override
   State<NutritionChart> createState() => _NutritionChartState();
@@ -20,7 +20,25 @@ class _NutritionChartState extends State<NutritionChart> {
     Colors.green.shade400,
   ];
   final List<String> _labels = ['Calories', 'Protein', 'Chất béo', 'Carbs'];
-  final List<String> _days = ['Th2', 'Th3', 'Th4', 'Th5', 'Th6', 'Th7', 'CN'];
+  late List<String> _days;
+
+  @override
+  void initState() {
+    super.initState();
+    // Tạo danh sách ngày/tháng cho 7 ngày gần nhất
+    _generateDateLabels();
+  }
+
+  // Phương thức tạo nhãn ngày/tháng cho 7 ngày gần nhất
+  void _generateDateLabels() {
+    final dateFormat = DateFormat('dd/MM');
+    final today = DateTime.now();
+    _days = List.generate(7, (index) {
+      // Tính ngày, bắt đầu từ 6 ngày trước đến hôm nay
+      final date = today.subtract(Duration(days: 6 - index));
+      return dateFormat.format(date);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -76,14 +76,27 @@ class StartUpPage extends StatelessWidget {
 
     return BlocBuilder<AuthenticateBloc, AuthenticateState>(
       builder: (BuildContext context, state) {
-        return Container(
-          color: AppColor.darkBlue,
-          child: const Padding(
-              padding: EdgeInsets.all(16.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [],
-              )),
+        return Scaffold(
+          backgroundColor: Colors.white,
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                
+                Image.asset(
+                  'assets/icons/app_logo.png',
+                  width: 150,
+                  height: 150,
+                ),
+                const SizedBox(height: 30),
+                // Hiệu ứng loading bên dưới logo
+                CircularProgressIndicator.adaptive(
+                  valueColor: AlwaysStoppedAnimation<Color>(AppColor.darkBlue),
+                  backgroundColor: Colors.white,
+                ),
+              ],
+            ),
+          ),
         );
       },
     );

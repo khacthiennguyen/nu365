@@ -5,9 +5,9 @@ class NutritionSummary extends StatelessWidget {
   final Map<String, dynamic> todayNutrition;
 
   const NutritionSummary({
-    Key? key,
+    super.key,
     required this.todayNutrition,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +30,8 @@ class NutritionSummary extends StatelessWidget {
     final fatGoal = goals['fat'] as double? ?? 0.0;
     final carbsGoal = goals['carbs'] as double? ?? 0.0;
 
+    // Kiểm tra xem mục tiêu có được thiết lập bởi người dùng hay không
+    // Đơn giản hơn - nếu bất kỳ mục tiêu nào bằng 0, coi như chưa thiết lập
     final bool goalsNotSet =
         caloriesGoal <= 0 || proteinGoal <= 0 || fatGoal <= 0 || carbsGoal <= 0;
 

@@ -7,36 +7,22 @@ import 'package:nu365/setup_service_locator.dart';
 class SettingsServices {
   Future<SettingsState> loadUserInfo() async {
     try {
-      print("DEBUG: Bắt đầu loadUserInfo");
       final supabase = sl<SupabaseService>().client;
       final sessionData =
           RuntimeMemoryStorage.get<Map<String, dynamic>>('session');
 
-      print("DEBUG: Session data: $sessionData");
       String userId = sessionData!['uId'];
-      print("DEBUG: userId: $userId");
 
       final rl = await supabase.from('users').select().eq('userId', userId);
-      print("DEBUG: Supabase response: $rl");
 
       if (rl.isEmpty) {
-        print("DEBUG: Không tìm thấy dữ liệu user");
         return LoadInfoUserFailure(error: "Không tìm thấy dữ liệu người dùng");
       }
 
-      print("DEBUG: Raw data from Supabase: ${rl[0]}");
-
       try {
         UserInfo userInfo = UserInfo.fromJson(rl[0]);
-        print("DEBUG: UserInfo object: $userInfo");
-
-        // Sử dụng phương thức toJsonString mới thay vì toJson()
-        print("DEBUG: UserInfo.toJsonString(): ${userInfo.toJsonString()}");
-
         return LoadInfoUserSuccess(userInfo: userInfo);
       } catch (jsonError) {
-        print("DEBUG: Error parsing JSON: $jsonError");
-
         // Thử tạo UserInfo trực tiếp từ dữ liệu
         try {
           final jsonData = rl[0];
@@ -47,8 +33,7 @@ class SettingsServices {
             try {
               createdAt = DateTime.parse(jsonData['created_at']);
             } catch (e) {
-              print(
-                  "DEBUG: Không thể parse created_at: ${jsonData['created_at']}");
+              // Bỏ qua lỗi parsing
             }
           }
 
@@ -58,8 +43,7 @@ class SettingsServices {
             try {
               birthDate = DateTime.parse(jsonData['dayofbirth']);
             } catch (e) {
-              print(
-                  "DEBUG: Không thể parse dayofbirth: ${jsonData['dayofbirth']}");
+              // Bỏ qua lỗi parsing
             }
           }
 
@@ -77,25 +61,18 @@ class SettingsServices {
             createdAt: jsonData['created_at'] ?? createdAt.toString(),
           );
 
-          print("DEBUG: Manually created UserInfo: $userInfo");
-          print("DEBUG: UserInfo.toJsonString(): ${userInfo.toJsonString()}");
-
           return LoadInfoUserSuccess(userInfo: userInfo);
         } catch (manualError) {
-          print("DEBUG: Error creating UserInfo manually: $manualError");
           return LoadInfoUserFailure(error: "Lỗi xử lý dữ liệu: $manualError");
         }
       }
-    } catch (e, stackTrace) {
-      print("DEBUG: Error in loadUserInfo: $e");
-      print("DEBUG: Stack trace: $stackTrace");
+    } catch (e) {
       return LoadInfoUserFailure(error: e.toString());
     }
   }
 
   Future<SettingsState> updateUserInfo(UserInfo userInfo) async {
     try {
-      print("DEBUG: Bắt đầu updateUserInfo");
       final supabase = sl<SupabaseService>().client;
 
       // Chuẩn bị dữ liệu để cập nhật lên Supabase
@@ -108,21 +85,15 @@ class SettingsServices {
         'goal_carbs': userInfo.goal_carbs,
       };
 
-      print("DEBUG: Data to update: $dataToUpdate");
-
       // Cập nhật dữ liệu lên Supabase
-      final response = await supabase
+      await supabase
           .from('users')
           .update(dataToUpdate)
           .eq('userId', userInfo.userId);
 
-      print("DEBUG: Update response: $response");
-
       // Cập nhật thành công, trả về state với thông tin đã cập nhật
       return LoadInfoUserSuccess(userInfo: userInfo);
-    } catch (e, stackTrace) {
-      print("DEBUG: Error in updateUserInfo: $e");
-      print("DEBUG: Stack trace: $stackTrace");
+    } catch (e) {
       return LoadInfoUserFailure(error: e.toString());
     }
   }

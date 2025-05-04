@@ -8,10 +8,10 @@ class SocialLoginSection extends StatelessWidget {
   final VoidCallback onFacebookPressed;
 
   const SocialLoginSection({
-    Key? key,
+    super.key,
     required this.onGooglePressed,
     required this.onFacebookPressed,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:nu365/features/history/models/meal.dart';
 import 'package:nu365/features/history/presention/widgets/nutrient_info.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class MealCard extends StatelessWidget {
   final MealModel meal;
@@ -50,12 +51,16 @@ class MealCard extends StatelessWidget {
                     },
                     loadingBuilder: (context, child, loadingProgress) {
                       if (loadingProgress == null) return child;
-                      return Container(
-                        width: 80,
-                        height: 80,
-                        color: Colors.grey[200],
-                        child: const Center(
-                          child: CircularProgressIndicator(strokeWidth: 2),
+                      // Thay thế CircularProgressIndicator bằng Skeletonizer
+                      return Skeletonizer(
+                        enabled: true,
+                        child: Container(
+                          width: 80,
+                          height: 80,
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            borderRadius: BorderRadius.circular(8),
+                          ),
                         ),
                       );
                     },

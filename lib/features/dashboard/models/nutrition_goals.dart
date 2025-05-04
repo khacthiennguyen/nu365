@@ -22,19 +22,19 @@ class NutritionGoals {
 
   factory NutritionGoals.fromJson(Map<String, dynamic> json) {
     return NutritionGoals(
-      calories: json['goal_calories']?.toDouble() ?? 2000.0,
-      protein: json['goal_protein']?.toDouble() ?? 100.0,
-      fat: json['goal_fat']?.toDouble() ?? 70.0,
-      carbs: json['goal_carbs']?.toDouble() ?? 250.0,
+      calories: json['goal_calories']?.toDouble() ?? 0.0,
+      protein: json['goal_protein']?.toDouble() ?? 0.0,
+      fat: json['goal_fat']?.toDouble() ?? 0.0,
+      carbs: json['goal_carbs']?.toDouble() ?? 0.0,
     );
   }
 
   factory NutritionGoals.empty() {
     return NutritionGoals(
-      calories: 2000.0,
-      protein: 100.0,
-      fat: 70.0,
-      carbs: 250.0,
+      calories: 0.0,
+      protein: 0.0,
+      fat: 0.0,
+      carbs: 0.0,
     );
   }
 

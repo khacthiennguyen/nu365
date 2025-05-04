@@ -1,7 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:nu365/features/auth/models/user.dart';
 
-part '../../../generated/features/sign-in/models/credentail.g.dart';
+part '../../../generated/features/auth/models/credentail.g.dart';
 
 @JsonSerializable(explicitToJson: true)
 class Credential {
