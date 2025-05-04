@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:nu365/features/scan/models/prediction.dart';
 import 'package:nu365/features/scan/models/scan_result.dart';
 import 'package:nu365/features/scan/presentation/widgets/nutrition_tab_content.dart';
-import 'package:nu365/features/scan/presentation/widgets/ingredients_tab_content.dart';
+import 'package:nu365/features/scan/presentation/widgets/detect_tab_content.dart';
 import 'package:nu365/core/constants/app_theme.dart';
 
 class ScanResultsTabs extends StatefulWidget {
@@ -48,7 +48,7 @@ class _ScanResultsTabsState extends State<ScanResultsTabs>
             indicatorWeight: 3,
             tabs: const [
               Tab(text: 'Nutrition'),
-              Tab(text: 'Ingredients'),
+              Tab(text: 'Detect'),
             ],
           ),
           Expanded(
@@ -56,7 +56,7 @@ class _ScanResultsTabsState extends State<ScanResultsTabs>
               controller: _tabController,
               children: [
                 NutritionTabContent(nutrition: widget.nutrition),
-                IngredientsTabContent(predictions: widget.predictions),
+                DetectTabContent(predictions: widget.predictions),
               ],
             ),
           ),

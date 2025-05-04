@@ -4,6 +4,7 @@ part '../../../generated/features/scan/models/scan_result.g.dart';
 
 @JsonSerializable()
 class FoodInfo {
+  final String? foodId; // Add foodId field
   final String foodName;
   final double calories;
   final double protein;
@@ -12,6 +13,7 @@ class FoodInfo {
   final int quantity; // Thêm số lượng
 
   FoodInfo({
+    this.foodId, // Initialize foodId
     required this.foodName,
     required this.calories,
     required this.protein,
@@ -28,6 +30,7 @@ class FoodInfo {
   // Tạo bản sao với số lượng mới
   FoodInfo copyWithQuantity(int newQuantity) {
     return FoodInfo(
+      foodId: foodId, // Include foodId in copy
       foodName: foodName,
       calories: calories,
       protein: protein,

@@ -29,26 +29,28 @@ class ProfileScreen extends StatelessWidget {
                 _buildMenuItem(
                   icon: Icons.person_outline,
                   title: 'Personal Information',
-                  onTap: () {},
+                  onTap: () {
+                    
+                  },
                 ),
                 const Divider(),
-                _buildMenuItem(
-                  icon: Icons.fitness_center_outlined,
-                  title: 'Health & Fitness',
-                  onTap: () {},
-                ),
-                const Divider(),
+                // _buildMenuItem(
+                //   icon: Icons.fitness_center_outlined,
+                //   title: 'Goals',
+                //   onTap: () {},
+                // ),
+                // const Divider(),
                 _buildMenuItem(
                   icon: Icons.settings_outlined,
                   title: 'Settings',
                   onTap: () {},
                 ),
-                const Divider(),
-                _buildMenuItem(
-                  icon: Icons.help_outline,
-                  title: 'Help & Support',
-                  onTap: () {},
-                ),
+                // const Divider(),
+                // _buildMenuItem(
+                //   icon: Icons.help_outline,
+                //   title: 'Help & Support',
+                //   onTap: () {},
+                // ),
               ],
             ),
           ),

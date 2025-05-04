@@ -27,7 +27,7 @@ class NutritionInfoCard extends StatelessWidget {
             Text(
               label,
               style: const TextStyle(
-                fontSize: 14,
+                fontSize: 18,
                 color: Colors.grey,
               ),
             ),

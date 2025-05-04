@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:nu365/features/models/meal.dart';
+
 
 class RecentMeals extends StatelessWidget {
-  const RecentMeals({Key? key}) : super(key: key);
+  const RecentMeals({super.key});
 
   @override
   Widget build(BuildContext context) {
     // Get today's meals
-    final todayMeals = mealHistory.isNotEmpty ? mealHistory[0].meals : [];
+    final todayMeals =[];
 
     return Card(
       child: Padding(
