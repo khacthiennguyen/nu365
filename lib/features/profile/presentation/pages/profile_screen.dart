@@ -29,10 +29,9 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 _buildMenuItem(
                   icon: Icons.person_outline,
-                  title: 'Personal Information',
+                  title: 'Thông tin cá nhân',
                   onTap: () {
                     context.push('/personal-info');
-   
                   },
                 ),
                 const Divider(),
@@ -44,7 +43,7 @@ class ProfileScreen extends StatelessWidget {
                 // const Divider(),
                 _buildMenuItem(
                   icon: Icons.settings_outlined,
-                  title: 'Settings',
+                  title: 'Cài đặt',
                   onTap: () {},
                 ),
                 // const Divider(),

@@ -18,7 +18,7 @@ class LogoutButton extends StatelessWidget {
         },
         icon: const Icon(Icons.logout, color: Colors.red),
         label: const Text(
-          'Logout',
+          'Đăng xuất',
           style: TextStyle(color: Colors.red),
         ),
       ),

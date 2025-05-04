@@ -1,0 +1,30 @@
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+MealSummary _$MealSummaryFromJson(Map<String, dynamic> json) => MealSummary(
+      id: json['id'] as String,
+      userId: json['userId'] as String,
+      name: json['name'] as String,
+      imageUrl: json['imageUrl'] as String?,
+      calories: (json['calories'] as num).toDouble(),
+      protein: (json['protein'] as num).toDouble(),
+      fat: (json['fat'] as num).toDouble(),
+      carbs: (json['carbs'] as num).toDouble(),
+      mealTime: DateTime.parse(json['meal_time'] as String),
+      mealType: json['meal_type'] as String,
+    );
+
+Map<String, dynamic> _$MealSummaryToJson(MealSummary instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'userId': instance.userId,
+      'name': instance.name,
+      'imageUrl': instance.imageUrl,
+      'calories': instance.calories,
+      'protein': instance.protein,
+      'fat': instance.fat,
+      'carbs': instance.carbs,
+      'meal_time': instance.mealTime.toIso8601String(),
+      'meal_type': instance.mealType,
+    };

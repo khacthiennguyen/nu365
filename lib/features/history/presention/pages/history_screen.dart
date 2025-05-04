@@ -17,7 +17,7 @@ class HistoryScreen extends StatelessWidget {
       create: (context) => HistoryBloc()..add(const LoadHistoryEvent()),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('Meal History'),
+          title: const Text('Lịch sử bữa ăn đã lưu',style: TextStyle(fontWeight: FontWeight.bold),),
           actions: [
             BlocBuilder<HistoryBloc, HistoryState>(
               builder: (context, state) {

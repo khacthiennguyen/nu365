@@ -5,7 +5,7 @@
 UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => UserInfo(
       userId: json['userId'] as String,
       email: json['email'] as String,
-      userName: json['username'] as String,
+      userName: json['userName'] as String,
       created_at: DateTime.parse(json['created_at'] as String),
       dayofbirth: json['dayofbirth'] == null
           ? null
@@ -20,7 +20,7 @@ UserInfo _$UserInfoFromJson(Map<String, dynamic> json) => UserInfo(
 Map<String, dynamic> _$UserInfoToJson(UserInfo instance) => <String, dynamic>{
       'userId': instance.userId,
       'email': instance.email,
-      'username': instance.userName,
+      'userName': instance.userName,
       'created_at': instance.created_at.toIso8601String(),
       'dayofbirth': instance.dayofbirth?.toIso8601String(),
       'goal_calories': instance.goal_calories,

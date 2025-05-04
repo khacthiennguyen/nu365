@@ -266,6 +266,12 @@
       "languageVersion": "3.1"
     },
     {
+      "name": "fl_chart",
+      "rootUri": "file:///C:/Users/khact/AppData/Local/Pub/Cache/hosted/pub.dev/fl_chart-0.71.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "flat_buffers",
       "rootUri": "file:///C:/Users/khact/AppData/Local/Pub/Cache/hosted/pub.dev/flat_buffers-23.5.26",
       "packageUri": "lib/",
@@ -1016,7 +1022,7 @@
       "languageVersion": "3.1"
     }
   ],
-  "generated": "2025-05-03T12:27:45.513126Z",
+  "generated": "2025-05-04T05:58:38.821518Z",
   "generator": "pub",
   "generatorVersion": "3.7.2",
   "flutterRoot": "file:///C:/Users/khact/dev/flutter",
