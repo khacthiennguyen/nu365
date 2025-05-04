@@ -9,7 +9,7 @@ import 'package:nu365/features/profile/presentation/pages/persional_infomation.d
 import 'package:nu365/features/profile/presentation/pages/profile_screen.dart';
 import 'package:nu365/features/profile/presentation/widgets/profile_infomation.dart';
 import 'package:nu365/features/scan/presentation/pages/scan_screen_wrapper.dart';
-import 'package:nu365/features/sign-in/presentation/pages/login_screen.dart';
+import 'package:nu365/features/auth/presentation/pages/login_screen.dart';
 
 GoRouter appRoutes = GoRouter(
     initialLocation: '/',

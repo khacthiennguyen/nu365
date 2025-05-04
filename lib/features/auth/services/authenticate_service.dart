@@ -5,8 +5,9 @@ import 'package:nu365/core/api/dio/dio.dart' show dio;
 import 'package:nu365/core/api/utils/base_response.dart';
 import 'package:nu365/core/data/local/data_local.dart';
 import 'package:nu365/core/data/runtime/runtime_memory_storage.dart';
-import 'package:nu365/features/sign-in/logic/login_state.dart';
-import 'package:nu365/features/sign-in/models/credentail.dart';
+import 'package:nu365/features/auth/logic/login_state.dart';
+import 'package:nu365/features/auth/logic/register_state.dart';
+import 'package:nu365/features/auth/models/credentail.dart';
 
 class AuthenticateService {
   static Future<LoginState> login(String email, String password) async {
@@ -18,8 +19,8 @@ class AuthenticateService {
           return LoginFailed(message: "Invalid response from server");
         }
         try {
-        Credential credential = Credential.fromJson(response.payload);
-        //  print(credential.toJson().toString());
+          Credential credential = Credential.fromJson(response.payload);
+          //  print(credential.toJson().toString());
           String uId = credential.user.id;
           String username = credential.user.name;
           String accessToken = credential.session.accessToken;
@@ -31,12 +32,11 @@ class AuthenticateService {
               accessToken: accessToken,
               expiredAt: expiredAt);
           // Save user information to local storage
-        RuntimeMemoryStorage.setSession (
-            uId: uId, 
-            username: username, 
-            accessToken: accessToken, 
-            expiredAt: expiredAt
-        );
+          RuntimeMemoryStorage.setSession(
+              uId: uId,
+              username: username,
+              accessToken: accessToken,
+              expiredAt: expiredAt);
 
           return LoginSuccess(
               credential: credential); // Return the credential object);
@@ -78,4 +78,52 @@ class AuthenticateService {
     }
   }
 
+  static Future<RegisterState> register({
+    required String name,
+    required String email,
+    required String password,
+  }) async {
+    try {
+      BaseResponse response =
+          BaseResponse.fromDIOResponse(await dio.post("auth/register", data: {
+        "name": name,
+        "email": email,
+        "password": password,
+      }));
+
+      // For registration success - HTTP 200, 201
+      if (response.httpStatus == 200 || response.httpStatus == 201) {
+        return RegisterSuccess();
+      }
+
+      // If we need to verify email before activating account
+      if (response.httpStatus == 202) {
+        return RegisterActivationRequired(email: email, name: name);
+      }
+
+      return RegisterFailed(message: response.message ?? "Registration failed");
+    } on DioException catch (error) {
+      if (error.response == null) {
+        return RegisterFailed(
+            error: error,
+            message: "Network error: Unable to connect to server");
+      }
+
+      BaseResponse response = BaseResponse.fromDIOResponse(error.response!);
+
+      if (response.isMatch(HttpStatus.tooManyRequests)) {
+        return RegisterToManyRequest();
+      }
+
+      if (response.isMatch(HttpStatus.conflict)) {
+        return RegisterFailed(message: "Email already exists");
+      }
+
+      return RegisterFailed(
+          error: error, message: response.message ?? "Registration failed");
+    } catch (error) {
+      return RegisterFailed(
+          error: error as Exception, message: error.toString());
+    }
+  }
 }

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nu365/core/constants/app_theme.dart';
 
-class RegisterForm extends StatelessWidget {
+class RegisterForm extends StatefulWidget {
   final TextEditingController nameController;
   final TextEditingController emailController;
   final TextEditingController passwordController;
@@ -9,20 +9,28 @@ class RegisterForm extends StatelessWidget {
   final VoidCallback onRegisterPressed;
 
   const RegisterForm({
-    Key? key,
+    super.key,
     required this.nameController,
     required this.emailController,
     required this.passwordController,
     required this.confirmPasswordController,
     required this.onRegisterPressed,
-  }) : super(key: key);
+  });
+
+  @override
+  State<RegisterForm> createState() => _RegisterFormState();
+}
+
+class _RegisterFormState extends State<RegisterForm> {
+  bool _passwordVisible = false;
+  bool _confirmPasswordVisible = false;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         TextField(
-          controller: nameController,
+          controller: widget.nameController,
           decoration: const InputDecoration(
             labelText: 'Full Name',
             prefixIcon: Icon(Icons.person_outline),
@@ -30,7 +38,7 @@ class RegisterForm extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
-          controller: emailController,
+          controller: widget.emailController,
           decoration: const InputDecoration(
             labelText: 'Email',
             prefixIcon: Icon(Icons.email_outlined),
@@ -39,23 +47,43 @@ class RegisterForm extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         TextField(
-          controller: passwordController,
-          decoration: const InputDecoration(
+          controller: widget.passwordController,
+          decoration: InputDecoration(
             labelText: 'Password',
-            prefixIcon: Icon(Icons.lock_outline),
-            suffixIcon: Icon(Icons.visibility_outlined),
+            prefixIcon: const Icon(Icons.lock_outline),
+            suffixIcon: IconButton(
+              icon: Icon(
+                _passwordVisible ? Icons.visibility_off : Icons.visibility,
+              ),
+              onPressed: () {
+                setState(() {
+                  _passwordVisible = !_passwordVisible;
+                });
+              },
+            ),
           ),
-          obscureText: true,
+          obscureText: !_passwordVisible,
         ),
         const SizedBox(height: 16),
         TextField(
-          controller: confirmPasswordController,
-          decoration: const InputDecoration(
+          controller: widget.confirmPasswordController,
+          decoration: InputDecoration(
             labelText: 'Confirm Password',
-            prefixIcon: Icon(Icons.lock_outline),
-            suffixIcon: Icon(Icons.visibility_outlined),
+            prefixIcon: const Icon(Icons.lock_outline),
+            suffixIcon: IconButton(
+              icon: Icon(
+                _confirmPasswordVisible
+                    ? Icons.visibility_off
+                    : Icons.visibility,
+              ),
+              onPressed: () {
+                setState(() {
+                  _confirmPasswordVisible = !_confirmPasswordVisible;
+                });
+              },
+            ),
           ),
-          obscureText: true,
+          obscureText: !_confirmPasswordVisible,
         ),
         const SizedBox(height: 24),
         _buildRegisterButton(),
@@ -67,7 +95,7 @@ class RegisterForm extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: ElevatedButton(
-        onPressed: onRegisterPressed,
+        onPressed: widget.onRegisterPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.transparent,
           padding: EdgeInsets.zero,

@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of '../../../../features/sign-in/models/credentail.dart';
+part of '../../../../features/auth/models/credentail.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator

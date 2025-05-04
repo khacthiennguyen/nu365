@@ -1,5 +1,5 @@
 
-import 'package:nu365/features/sign-in/models/credentail.dart';
+import 'package:nu365/features/auth/models/credentail.dart';
 
 sealed class LoginState {}
 

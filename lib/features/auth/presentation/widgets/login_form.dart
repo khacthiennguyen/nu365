@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nu365/core/constants/app_theme.dart';
-import 'package:nu365/features/sign-in/logic/login_bloc.dart';
-import 'package:nu365/features/sign-in/logic/login_state.dart';
+import 'package:nu365/features/auth/logic/login_bloc.dart';
+import 'package:nu365/features/auth/logic/login_state.dart';
 
-class LoginForm extends StatelessWidget {
+class LoginForm extends StatefulWidget {
   final TextEditingController emailController;
   final TextEditingController passwordController;
   final VoidCallback onLoginPressed;
@@ -19,13 +19,20 @@ class LoginForm extends StatelessWidget {
   });
 
   @override
+  State<LoginForm> createState() => _LoginFormState();
+}
+
+class _LoginFormState extends State<LoginForm> {
+  bool _passwordVisible = false;
+
+  @override
   Widget build(BuildContext context) {
     return BlocBuilder<LoginBloc, LoginState>(
       builder: (context, state) {
         return Column(
           children: [
             TextField(
-              controller: emailController,
+              controller: widget.emailController,
               decoration: const InputDecoration(
                 labelText: 'Email',
                 prefixIcon: Icon(Icons.email_outlined),
@@ -35,19 +42,29 @@ class LoginForm extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             TextField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
+              controller: widget.passwordController,
+              obscureText: !_passwordVisible,
+              decoration: InputDecoration(
                 labelText: 'Password',
-                prefixIcon: Icon(Icons.lock_outline),
+                prefixIcon: const Icon(Icons.lock_outline),
                 hintText: 'Enter your password',
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _passwordVisible ? Icons.visibility_off : Icons.visibility,
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _passwordVisible = !_passwordVisible;
+                    });
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 8),
             Align(
               alignment: Alignment.centerRight,
               child: TextButton(
-                onPressed: onForgotPasswordPressed,
+                onPressed: widget.onForgotPasswordPressed,
                 child: const Text('Forgot password?'),
               ),
             ),
@@ -55,7 +72,7 @@ class LoginForm extends StatelessWidget {
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: state is LoginLoading ? null : onLoginPressed,
+                onPressed: state is LoginLoading ? null : widget.onLoginPressed,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.transparent,
                   padding: EdgeInsets.zero,

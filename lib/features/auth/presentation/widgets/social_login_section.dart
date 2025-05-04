@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nu365/core/constants/app_theme.dart';
 import 'package:nu365/core/constants/images.dart';
-import 'package:nu365/features/sign-in/presentation/widgets/social_bution.dart';
+import 'package:nu365/features/auth/presentation/widgets/social_bution.dart';
 
 class SocialLoginSection extends StatelessWidget {
   final VoidCallback onGooglePressed;
