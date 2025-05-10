@@ -43,8 +43,10 @@ class ProfileScreen extends StatelessWidget {
                 // const Divider(),
                 _buildMenuItem(
                   icon: Icons.settings_outlined,
-                  title: 'Cài đặt',
-                  onTap: () {},
+                  title: 'Cài đặt tài khoản',
+                  onTap: () {
+                    context.push('/profile-settings');
+                  },
                 ),
                 // const Divider(),
                 // _buildMenuItem(

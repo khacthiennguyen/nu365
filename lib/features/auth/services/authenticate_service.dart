@@ -14,17 +14,24 @@ class AuthenticateService {
     try {
       BaseResponse response = BaseResponse.fromDIOResponse(await dio
           .post("auth/login", data: {"email": email, "password": password}));
+
       if (response.httpStatus == 200) {
         if (response.payload == null) {
           return LoginFailed(message: "Invalid response from server");
         }
         try {
           Credential credential = Credential.fromJson(response.payload);
-          //  print(credential.toJson().toString());
+          // print(credential.toJson().toString());
           String uId = credential.user.id;
           String username = credential.user.name;
           String accessToken = credential.session.accessToken;
-          String expiredAt = credential.session.expiresAt.toString();
+
+          // Convert Unix timestamp (seconds) to DateTime and then to ISO string format
+          DateTime expiredDateTime = DateTime.fromMillisecondsSinceEpoch(
+              credential.session.expiresAt *
+                  1000); // Convert seconds to milliseconds
+          String expiredAt = expiredDateTime.toIso8601String();
+
           // print("full ifo: $uId, $username, $accessToken, $expiredAt");
           await SQLite.saveSession(
               uId: uId,
@@ -44,6 +51,12 @@ class AuthenticateService {
           return LoginFailed(message: "Failed to parse credentials");
         }
       }
+
+      if (response.httpStatus == 403) {
+        return Login2FARequired(
+            email: email, password: password); // 2FA required
+      }
+
       return LoginFailed(message: "Unexpected response from server");
     } on DioException catch (error) {
       if (error.response == null) {
@@ -53,23 +66,31 @@ class AuthenticateService {
       }
 
       BaseResponse response = BaseResponse.fromDIOResponse(error.response!);
+      // ===== Xử lý các trường hợp xác thực đặc biệt =====
 
+      // Trường hợp 1: Yêu cầu xác thực 2FA với HTTP 403
+      if (response.httpStatus == 403 &&
+          response.message != null &&
+          response.message!.contains("2FA is enabled")) {
+        return Login2FARequired(email: email, password: password);
+      }
+
+      // Trường hợp 2: Quá nhiều yêu cầu đăng nhập
       if (response.isMatch(HttpStatus.tooManyRequests)) {
         return LoginToManyRequest();
       }
 
-      if (response.isMatch(HttpStatus.unauthorized, HttpStatus.accepted)) {
-        return Login2FARequired(email: email, password: password);
-      }
-
+      // Trường hợp 3: Tài khoản cần kích hoạt
       if (response.isMatch(HttpStatus.unauthorized, HttpStatus.continue_)) {
         return LoginActiveRequired(email: email, password: password);
       }
 
+      // Trường hợp 4: Tài khoản không tồn tại
       if (response.isMatch(HttpStatus.unauthorized, HttpStatus.notFound)) {
         return LoginFailed(message: "Account not exists!");
       }
 
+      // Trường hợp mặc định: Đăng nhập thất bại với thông báo từ server
       return LoginFailed(
           error: error,
           message: response.message ?? "Incorrect email or password!");
@@ -78,6 +99,7 @@ class AuthenticateService {
     }
   }
 
+//đăng ký tài khoản
   static Future<RegisterState> register({
     required String name,
     required String email,
@@ -124,6 +146,71 @@ class AuthenticateService {
     } catch (error) {
       return RegisterFailed(
           error: error as Exception, message: error.toString());
+    }
+  }
+
+  static Future<LoginState> loginwithotp(
+    String email,
+    String password,
+    String otp,
+  ) async {
+    try {
+      BaseResponse response = BaseResponse.fromDIOResponse(await dio.post(
+        "auth/login-with-otp",
+        data: {"email": email, "password": password, "otp": otp},
+      ));
+
+      if (response.httpStatus == 200) {
+        if (response.payload == null) {
+          return LoginFailed(message: "Invalid response from server");
+        }
+        try {
+          Credential credential = Credential.fromJson(response.payload);
+          // print(credential.toJson().toString());
+          String uId = credential.user.id;
+          String username = credential.user.name;
+          String accessToken = credential.session.accessToken;
+
+          // Convert Unix timestamp (seconds) to DateTime and then to ISO string format
+          DateTime expiredDateTime = DateTime.fromMillisecondsSinceEpoch(
+              credential.session.expiresAt *
+                  1000); // Convert seconds to milliseconds
+          String expiredAt = expiredDateTime.toIso8601String();
+
+          // print("full ifo: $uId, $username, $accessToken, $expiredAt");
+          await SQLite.saveSession(
+              uId: uId,
+              username: username,
+              accessToken: accessToken,
+              expiredAt: expiredAt);
+          // Save user information to local storage
+          RuntimeMemoryStorage.setSession(
+              uId: uId,
+              username: username,
+              accessToken: accessToken,
+              expiredAt: expiredAt);
+
+          return LoginSuccess(
+              credential: credential); // Return the credential object);
+        } catch (e) {
+          return LoginFailed(message: "Failed to parse credentials");
+        }
+      }
+
+      return LoginFailed(message: "Unexpected response from server");
+    } on DioException catch (error) {
+      if (error.response == null) {
+        return LoginFailed(
+            error: error,
+            message: "Network error: Unable to connect to server");
+      }
+
+      BaseResponse response = BaseResponse.fromDIOResponse(error.response!);
+
+      return LoginFailed(
+          error: error, message: response.message ?? "Incorrect OTP!");
+    } catch (error) {
+      return LoginFailed(error: error as Exception, message: error.toString());
     }
   }
 }

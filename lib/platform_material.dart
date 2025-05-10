@@ -12,21 +12,18 @@ class PlatformMaterial extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: MaterialApp(
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => AuthenticateBloc()),
+        BlocProvider(create: (context) => LoginBloc()),
+        BlocProvider(create: (context) => RegisterBloc()),
+      ],
+      child: MaterialApp.router(
         theme: ThemeData(
           textTheme: GoogleFonts.robotoTextTheme(),
         ),
-        navigatorKey: GlobalKey<NavigatorState>(),
-        home: MultiBlocProvider(
-            providers: [
-              BlocProvider(create: (context) => AuthenticateBloc()),
-              BlocProvider(create: (context) => LoginBloc()),
-              BlocProvider(create: (context) => RegisterBloc()),
-            ],
-            child: MaterialApp.router(
-              routerConfig: appRoutes,
-            )),
+        debugShowCheckedModeBanner: false,
+        routerConfig: appRoutes,
       ),
     );
   }

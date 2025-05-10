@@ -30,7 +30,6 @@ class MainLayout extends StatelessWidget {
     }
 
     return Scaffold(
-
       body: Container(
         color: AppTheme.backgroundLight,
         padding: const EdgeInsets.symmetric(

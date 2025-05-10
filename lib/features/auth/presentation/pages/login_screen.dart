@@ -8,6 +8,7 @@ import 'package:nu365/features/auth/logic/login_state.dart';
 import 'package:nu365/features/auth/logic/register_bloc.dart';
 import 'package:nu365/features/auth/logic/register_event.dart';
 import 'package:nu365/features/auth/logic/register_state.dart';
+import 'package:nu365/features/auth/presentation/pages/otp_screen.dart';
 import 'package:nu365/features/auth/presentation/widgets/auth_tabs.dart';
 import 'package:nu365/features/auth/presentation/widgets/login_form.dart';
 import 'package:nu365/features/auth/presentation/widgets/logo_widget.dart';
@@ -97,28 +98,64 @@ class _LoginScreenState extends State<LoginScreen>
       listeners: [
         BlocListener<LoginBloc, LoginState>(
           listener: (context, state) {
+            // Xử lý các trạng thái ban đầu hoặc loading
+            if (state is LoginLoading) {
+              // Hiển thị loading indicator
+              return;
+            }
+
+            if (state is LoginInitial) {
+              // Không cần xử lý ở trạng thái khởi tạo
+              return;
+            }
+
+            // Xử lý trường hợp đăng nhập thành công
             if (state is LoginSuccess) {
-              // Navigate with GoRouter instead of Navigator
               GoRouter.of(context).go('/dashboard');
-            } else if (state is LoginFailed) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message ?? 'Login failed')),
+              return;
+            }
+
+            // Xử lý trường hợp yêu cầu xác thực 2FA
+            if (state is Login2FARequired) {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => OtpScreen(
+                    email: state.email,
+                    password: state.password,
+                  ),
+                ),
               );
-            } else if (state is LoginToManyRequest) {
+              return;
+            }
+
+            // Xử lý các trường hợp lỗi
+            if (state is LoginToManyRequest) {
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                     content: Text(
                         'Too many login attempts. Please try again later.')),
               );
-            } else if (state is Login2FARequired) {
-              // Handle 2FA navigation here
+              return;
+            }
+
+            if (state is LoginFailed) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.message ?? 'Login failed')),
+              );
+              return;
             }
           },
         ),
         BlocListener<RegisterBloc, RegisterState>(
           listener: (context, state) {
+            // Xử lý trạng thái ban đầu hoặc loading
+            if (state is RegisterLoading || state is RegisterInitial) {
+              return;
+            }
+
+            // Xử lý trường hợp đăng ký thành công
             if (state is RegisterSuccess) {
-              // Show success message
+              // Hiển thị thông báo thành công
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: const Text(
@@ -132,34 +169,47 @@ class _LoginScreenState extends State<LoginScreen>
                 ),
               );
 
-              // Clear registration form fields
+              // Xóa thông tin từ các trường nhập liệu
               _nameController.clear();
               _emailController.clear();
               _passwordController.clear();
               _confirmPasswordController.clear();
 
-              // Switch to the login tab
-              _tabController.animateTo(0); // Index 0 is the login tab
-            } else if (state is RegisterFailed) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message ?? 'Registration failed')),
-              );
-            } else if (state is RegisterToManyRequest) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                    content: Text(
-                        'Too many registration attempts. Please try again later.')),
-              );
-            } else if (state is RegisterActivationRequired) {
-              // Show email verification message
+              // Chuyển về tab đăng nhập
+              _tabController.animateTo(0);
+              return;
+            }
+
+            // Xử lý trường hợp tài khoản cần kích hoạt
+            if (state is RegisterActivationRequired) {
+              // Hiển thị thông báo cần xác thực email
               ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(
                     content: Text(
                         'Please check your email to activate your account')),
               );
 
-              // Switch to login tab after informing about email verification
+              // Chuyển về tab đăng nhập
               _tabController.animateTo(0);
+              return;
+            }
+
+            // Xử lý trường hợp quá nhiều yêu cầu
+            if (state is RegisterToManyRequest) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                    content: Text(
+                        'Too many registration attempts. Please try again later.')),
+              );
+              return;
+            }
+
+            // Xử lý trường hợp đăng ký thất bại
+            if (state is RegisterFailed) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.message ?? 'Registration failed')),
+              );
+              return;
             }
           },
         ),

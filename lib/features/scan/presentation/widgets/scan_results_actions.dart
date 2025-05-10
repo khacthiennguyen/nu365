@@ -14,18 +14,19 @@ class ScanResultsActions extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.symmetric(horizontal: 10),
+      color: Colors.transparent,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text(
-            'Add to your meal log?',
+            'Lưu bữa ăn này ?',
             style: TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 12),
+
           Row(
             children: [
               // Retake button
@@ -33,14 +34,14 @@ class ScanResultsActions extends StatelessWidget {
                 child: OutlinedButton(
                   onPressed: onRetake,
                   style: OutlinedButton.styleFrom(
-                    padding: const EdgeInsets.symmetric(vertical: 16),
+
                     side: const BorderSide(color: Colors.grey),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
                   child: const Text(
-                    'Retake',
+                    'Chụp lại',
                     style: TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
@@ -76,11 +77,11 @@ class ScanResultsActions extends StatelessWidget {
                     ),
                     child: Container(
                       alignment: Alignment.center,
-                      height: 48, // Add height to match the Retake button
+                      height: 42, // Add height to match the Retake button
                       width: double
                           .infinity, // Ensure the Container takes full width of the parent
                       child: const Text(
-                        'Save',
+                        'Lưu',
                         style: TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,

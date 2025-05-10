@@ -40,13 +40,27 @@ class StartUpPage extends StatelessWidget {
         return;
       }
 
-      DateTime expiredAt = DateTime.parse(result.first["expiredAt"]);
+      // Debug information to help diagnose the issue
+      // print("Session found: ${result.first}");
+      String expiredAtStr = result.first["expiredAt"];
+      // print("Session expiration string: $expiredAtStr");
 
-      if (DateTime.now().isAfter(expiredAt)) {
-        // print("Session expired, redirecting to login");
-        context.read<AuthenticateBloc>().add(AuthenticateLoggedOut());
-        await db.delete("Session");
-        return;
+      try {
+        DateTime expiredAt = DateTime.parse(expiredAtStr);
+        // print("Parsed expiration: $expiredAt");
+        // print("Current time: ${DateTime.now()}");
+        // print("Is expired: ${DateTime.now().isAfter(expiredAt)}");
+
+        if (DateTime.now().isAfter(expiredAt)) {
+          // print("Session expired, redirecting to login");
+          context.read<AuthenticateBloc>().add(AuthenticateLoggedOut());
+          await db.delete("Session");
+          return;
+        }
+      } catch (parseError) {
+        // print("Error parsing expiration date: $parseError");
+        // If we can't parse the date, treat the session as valid for now
+        // This is to avoid unexpected logouts due to date format issues
       }
 
       String accessToken = result.first["accessToken"];
@@ -56,10 +70,11 @@ class StartUpPage extends StatelessWidget {
           uId: uId,
           username: username,
           accessToken: accessToken,
-          expiredAt: expiredAt.toString());
+          expiredAt: expiredAtStr);
       // print("Valid session found, logging in with token");
       context.read<AuthenticateBloc>().add(AuthenticateLoggedIn(accessToken));
     } catch (e) {
+      // print("Error loading authentication state: $e");
       if (context.mounted) {
         context.read<AuthenticateBloc>().add(AuthenticateLoggedOut());
       }
@@ -82,7 +97,6 @@ class StartUpPage extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                
                 Image.asset(
                   'assets/icons/app_logo.png',
                   width: 150,

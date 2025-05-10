@@ -37,7 +37,6 @@ class RecentMeals extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 8.0),
             if (recentMeals.isEmpty)
               const Padding(
                 padding: EdgeInsets.symmetric(vertical: 24.0),
@@ -52,15 +51,16 @@ class RecentMeals extends StatelessWidget {
                 ),
               )
             else
-              ListView.builder(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                itemCount: recentMeals.length,
-                itemBuilder: (context, index) {
-                  final meal = recentMeals[index];
-                  return _buildMealItem(context, meal);
-                },
-              ),
+               ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: recentMeals.length,
+                  itemBuilder: (context, index) {
+                    final meal = recentMeals[index];
+                    return _buildMealItem(context, meal);
+                  },
+                ),
+
           ],
         ),
       ),
@@ -80,9 +80,6 @@ class RecentMeals extends StatelessWidget {
 
     return InkWell(
       onTap: () {
-        // Using GoRouter to navigate to meal detail
-        // We'll need to add this route to your GoRouter configuration
-        // For now, we'll navigate back to history screen
         context.go('/history');
       },
       child: Container(
