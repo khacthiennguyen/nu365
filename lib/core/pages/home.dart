@@ -65,10 +65,12 @@ class StartUpPage extends StatelessWidget {
 
       String accessToken = result.first["accessToken"];
       String username = result.first["username"];
+      String email = result.first["email"];
       String uId = result.first["uId"];
       RuntimeMemoryStorage.setSession(
           uId: uId,
           username: username,
+          email: email,
           accessToken: accessToken,
           expiredAt: expiredAtStr);
       // print("Valid session found, logging in with token");

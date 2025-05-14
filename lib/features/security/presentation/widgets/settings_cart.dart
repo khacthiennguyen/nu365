@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SettingsCard extends StatelessWidget {
-  final String title;
+  final String ? title;
   final List<Widget> widgets;
-  const SettingsCard({super.key, required this.widgets, required this.title});
+  const SettingsCard({super.key, required this.widgets,  this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,10 @@ class SettingsCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisSize: MainAxisSize.min,
           children: [
-            Align(
+            if (title != null) Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                title,
+                title ?? '',
                 style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
               ),
             ),

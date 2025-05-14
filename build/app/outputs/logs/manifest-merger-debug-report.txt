@@ -10,6 +10,16 @@ MERGED from [:image_picker_android] D:\nu365\build\image_picker_android\intermed
 MERGED from [:image_picker_android] D:\nu365\build\image_picker_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:8:5-32:19
 MERGED from [:url_launcher_android] D:\nu365\build\url_launcher_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:7:5-12:19
 MERGED from [:url_launcher_android] D:\nu365\build\url_launcher_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:7:5-12:19
+MERGED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:22:5-38:19
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\03db382edb63c57d8de629e444088e69\transformed\jetified-play-services-fido-20.0.1\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\03db382edb63c57d8de629e444088e69\transformed\jetified-play-services-fido-20.0.1\AndroidManifest.xml:7:5-8:19
+MERGED from [com.google.android.gms:play-services-base:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b93785a04fcd49acabbaa600426866db\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-base:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b93785a04fcd49acabbaa600426866db\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:19:5-23:19
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\a0dd44f6bde9aaae99011f8ea15baea7\transformed\jetified-play-services-tasks-18.1.0\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\a0dd44f6bde9aaae99011f8ea15baea7\transformed\jetified-play-services-tasks-18.1.0\AndroidManifest.xml:5:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\48bb13e58e49cdf1e6377472107b28a8\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:20:5-24:19
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\48bb13e58e49cdf1e6377472107b28a8\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:20:5-24:19
 MERGED from [androidx.window:window:1.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\aed2861b2b6894f7067df3f3f96b791f\transformed\jetified-window-1.2.0\AndroidManifest.xml:22:5-29:19
 MERGED from [androidx.window:window:1.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\aed2861b2b6894f7067df3f3f96b791f\transformed\jetified-window-1.2.0\AndroidManifest.xml:22:5-29:19
 MERGED from [androidx.core:core:1.13.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\dfc2fbca530748e569b0737b09fa016f\transformed\core-1.13.1\AndroidManifest.xml:28:5-89
@@ -35,6 +45,7 @@ INJECTED from D:\nu365\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from D:\nu365\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 INJECTED from D:\nu365\android\app\src\debug\AndroidManifest.xml:1:1-7:12
 MERGED from [:camera_android_camerax] D:\nu365\build\camera_android_camerax\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-15:12
+MERGED from [:otp_pin_field] D:\nu365\build\otp_pin_field\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-8:12
 MERGED from [:shared_preferences_android] D:\nu365\build\shared_preferences_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.camera:camera-video:1.4.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\062308797b9e4d6b88ecc1984bddba1f\transformed\jetified-camera-video-1.4.1\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.camera:camera-lifecycle:1.4.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\5271d7f9afefeb924f43e72ad2df04d0\transformed\jetified-camera-lifecycle-1.4.1\AndroidManifest.xml:2:1-7:12
@@ -47,6 +58,13 @@ MERGED from [:path_provider_android] D:\nu365\build\path_provider_android\interm
 MERGED from [:permission_handler_android] D:\nu365\build\permission_handler_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:sqflite_android] D:\nu365\build\sqflite_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-7:12
 MERGED from [:url_launcher_android] D:\nu365\build\url_launcher_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:2:1-14:12
+MERGED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:17:1-40:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\khact\.gradle\caches\8.10.2\transforms\04f0f0676f3643357eaa49f81d75cd2e\transformed\jetified-play-services-auth-api-phone-18.0.2\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.10] C:\Users\khact\.gradle\caches\8.10.2\transforms\1b29cdb341ee6ce222a593dfe9e4e8a4\transformed\jetified-play-services-auth-base-18.0.10\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\03db382edb63c57d8de629e444088e69\transformed\jetified-play-services-fido-20.0.1\AndroidManifest.xml:2:1-10:12
+MERGED from [com.google.android.gms:play-services-base:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b93785a04fcd49acabbaa600426866db\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:16:1-24:12
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\a0dd44f6bde9aaae99011f8ea15baea7\transformed\jetified-play-services-tasks-18.1.0\AndroidManifest.xml:2:1-6:12
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\48bb13e58e49cdf1e6377472107b28a8\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:16:1-26:12
 MERGED from [androidx.preference:preference:1.2.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\12a085f4af97d8500c9432a48145ea1b\transformed\preference-1.2.1\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\845d779a6f9703b804f5e43452bcc2e5\transformed\appcompat-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.fragment:fragment-ktx:1.7.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\da563446475d3ff73b8066be02648858\transformed\jetified-fragment-ktx-1.7.1\AndroidManifest.xml:2:1-7:12
@@ -60,7 +78,7 @@ MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.2.0] C:\Users\khact\
 MERGED from [androidx.window:window:1.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\aed2861b2b6894f7067df3f3f96b791f\transformed\jetified-window-1.2.0\AndroidManifest.xml:17:1-31:12
 MERGED from [androidx.window:window-java:1.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\a2be31f5f98c024d17eda5160252de46\transformed\jetified-window-java-1.2.0\AndroidManifest.xml:17:1-21:12
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\f7264ae1be065c300b7a81eb08f37927\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\f5514dcb374b97bfc540797fb8036c6b\transformed\loader-1.0.0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.1.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b19d15f8d9a13fc8029cba36d8cb5768\transformed\loader-1.1.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\7d52ea09101bb351c12b3e49b2217222\transformed\viewpager-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\03c28736e15b3378b012cee867bacea5\transformed\jetified-lifecycle-livedata-core-ktx-2.7.0\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.lifecycle:lifecycle-viewmodel-ktx:2.7.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\1b308bb3b211b8a2a98b65df57ac5d71\transformed\jetified-lifecycle-viewmodel-ktx-2.7.0\AndroidManifest.xml:2:1-7:12
@@ -133,6 +151,8 @@ INJECTED from D:\nu365\android\app\src\debug\AndroidManifest.xml
 INJECTED from D:\nu365\android\app\src\debug\AndroidManifest.xml
 MERGED from [:camera_android_camerax] D:\nu365\build\camera_android_camerax\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:camera_android_camerax] D:\nu365\build\camera_android_camerax\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
+MERGED from [:otp_pin_field] D:\nu365\build\otp_pin_field\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:6:5-44
+MERGED from [:otp_pin_field] D:\nu365\build\otp_pin_field\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:6:5-44
 MERGED from [:shared_preferences_android] D:\nu365\build\shared_preferences_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:shared_preferences_android] D:\nu365\build\shared_preferences_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [androidx.camera:camera-video:1.4.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\062308797b9e4d6b88ecc1984bddba1f\transformed\jetified-camera-video-1.4.1\AndroidManifest.xml:5:5-44
@@ -157,6 +177,20 @@ MERGED from [:sqflite_android] D:\nu365\build\sqflite_android\intermediates\merg
 MERGED from [:sqflite_android] D:\nu365\build\sqflite_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:url_launcher_android] D:\nu365\build\url_launcher_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
 MERGED from [:url_launcher_android] D:\nu365\build\url_launcher_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\khact\.gradle\caches\8.10.2\transforms\04f0f0676f3643357eaa49f81d75cd2e\transformed\jetified-play-services-auth-api-phone-18.0.2\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:18.0.2] C:\Users\khact\.gradle\caches\8.10.2\transforms\04f0f0676f3643357eaa49f81d75cd2e\transformed\jetified-play-services-auth-api-phone-18.0.2\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.10] C:\Users\khact\.gradle\caches\8.10.2\transforms\1b29cdb341ee6ce222a593dfe9e4e8a4\transformed\jetified-play-services-auth-base-18.0.10\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:18.0.10] C:\Users\khact\.gradle\caches\8.10.2\transforms\1b29cdb341ee6ce222a593dfe9e4e8a4\transformed\jetified-play-services-auth-base-18.0.10\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\03db382edb63c57d8de629e444088e69\transformed\jetified-play-services-fido-20.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-fido:20.0.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\03db382edb63c57d8de629e444088e69\transformed\jetified-play-services-fido-20.0.1\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b93785a04fcd49acabbaa600426866db\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-base:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b93785a04fcd49acabbaa600426866db\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\a0dd44f6bde9aaae99011f8ea15baea7\transformed\jetified-play-services-tasks-18.1.0\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-tasks:18.1.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\a0dd44f6bde9aaae99011f8ea15baea7\transformed\jetified-play-services-tasks-18.1.0\AndroidManifest.xml:4:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\48bb13e58e49cdf1e6377472107b28a8\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:18:5-43
+MERGED from [com.google.android.gms:play-services-basement:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\48bb13e58e49cdf1e6377472107b28a8\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:18:5-43
 MERGED from [androidx.preference:preference:1.2.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\12a085f4af97d8500c9432a48145ea1b\transformed\preference-1.2.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.preference:preference:1.2.1] C:\Users\khact\.gradle\caches\8.10.2\transforms\12a085f4af97d8500c9432a48145ea1b\transformed\preference-1.2.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.appcompat:appcompat:1.1.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\845d779a6f9703b804f5e43452bcc2e5\transformed\appcompat-1.1.0\AndroidManifest.xml:20:5-22:41
@@ -183,8 +217,8 @@ MERGED from [androidx.window:window-java:1.2.0] C:\Users\khact\.gradle\caches\8.
 MERGED from [androidx.window:window-java:1.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\a2be31f5f98c024d17eda5160252de46\transformed\jetified-window-java-1.2.0\AndroidManifest.xml:19:5-44
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\f7264ae1be065c300b7a81eb08f37927\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\f7264ae1be065c300b7a81eb08f37927\transformed\legacy-support-core-utils-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\f5514dcb374b97bfc540797fb8036c6b\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.loader:loader:1.0.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\f5514dcb374b97bfc540797fb8036c6b\transformed\loader-1.0.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.1.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b19d15f8d9a13fc8029cba36d8cb5768\transformed\loader-1.1.0\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.loader:loader:1.1.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b19d15f8d9a13fc8029cba36d8cb5768\transformed\loader-1.1.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\7d52ea09101bb351c12b3e49b2217222\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\7d52ea09101bb351c12b3e49b2217222\transformed\viewpager-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.lifecycle:lifecycle-livedata-core-ktx:2.7.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\03c28736e15b3378b012cee867bacea5\transformed\jetified-lifecycle-livedata-core-ktx-2.7.0\AndroidManifest.xml:5:5-44
@@ -359,6 +393,40 @@ ADDED from [:url_launcher_android] D:\nu365\build\url_launcher_android\intermedi
 		ADDED from [:url_launcher_android] D:\nu365\build\url_launcher_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:11:13-71
 	android:name
 		ADDED from [:url_launcher_android] D:\nu365\build\url_launcher_android\intermediates\merged_manifest\debug\processDebugManifest\AndroidManifest.xml:9:13-74
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:23:9-27:75
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:25:13-46
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:26:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:27:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:24:13-93
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:33:9-37:51
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:35:13-36
+	android:visibleToInstantApps
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:37:13-48
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:36:13-107
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:21.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\9177536f9de7213a947e1b204b81fdc7\transformed\jetified-play-services-auth-21.2.0\AndroidManifest.xml:34:13-89
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b93785a04fcd49acabbaa600426866db\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:9-22:45
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b93785a04fcd49acabbaa600426866db\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:22:19-43
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b93785a04fcd49acabbaa600426866db\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:21:19-78
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\b93785a04fcd49acabbaa600426866db\transformed\jetified-play-services-base-18.3.0\AndroidManifest.xml:20:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\48bb13e58e49cdf1e6377472107b28a8\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:21:9-23:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\48bb13e58e49cdf1e6377472107b28a8\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:23:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.3.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\48bb13e58e49cdf1e6377472107b28a8\transformed\jetified-play-services-basement-18.3.0\AndroidManifest.xml:22:13-58
 uses-library#androidx.window.extensions
 ADDED from [androidx.window:window:1.2.0] C:\Users\khact\.gradle\caches\8.10.2\transforms\aed2861b2b6894f7067df3f3f96b791f\transformed\jetified-window-1.2.0\AndroidManifest.xml:23:9-25:40
 	android:required

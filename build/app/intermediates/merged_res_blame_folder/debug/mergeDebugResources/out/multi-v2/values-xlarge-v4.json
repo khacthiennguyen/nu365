@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.nu365.app-mergeDebugResources-45:/values-xlarge-v4/values-xlarge-v4.xml",
+            "outputFile": "com.example.nu365.app-mergeDebugResources-48:/values-xlarge-v4/values-xlarge-v4.xml",
             "map": [
                 {
                     "source": "C:\\Users\\khact\\.gradle\\caches\\8.10.2\\transforms\\845d779a6f9703b804f5e43452bcc2e5\\transformed\\appcompat-1.1.0\\res\\values-xlarge-v4\\values-xlarge-v4.xml",

@@ -24,6 +24,7 @@ class AuthenticateService {
           // print(credential.toJson().toString());
           String uId = credential.user.id;
           String username = credential.user.name;
+          String email = credential.user.email;
           String accessToken = credential.session.accessToken;
 
           // Convert Unix timestamp (seconds) to DateTime and then to ISO string format
@@ -36,12 +37,14 @@ class AuthenticateService {
           await SQLite.saveSession(
               uId: uId,
               username: username,
+              email: email,
               accessToken: accessToken,
               expiredAt: expiredAt);
           // Save user information to local storage
           RuntimeMemoryStorage.setSession(
               uId: uId,
               username: username,
+              email: email,
               accessToken: accessToken,
               expiredAt: expiredAt);
 
@@ -166,10 +169,11 @@ class AuthenticateService {
         }
         try {
           Credential credential = Credential.fromJson(response.payload);
-          // print(credential.toJson().toString());
+          //  print(credential.toJson().toString());
           String uId = credential.user.id;
           String username = credential.user.name;
           String accessToken = credential.session.accessToken;
+          String email = credential.user.email;
 
           // Convert Unix timestamp (seconds) to DateTime and then to ISO string format
           DateTime expiredDateTime = DateTime.fromMillisecondsSinceEpoch(
@@ -181,14 +185,17 @@ class AuthenticateService {
           await SQLite.saveSession(
               uId: uId,
               username: username,
+              email: email,
               accessToken: accessToken,
               expiredAt: expiredAt);
           // Save user information to local storage
           RuntimeMemoryStorage.setSession(
-              uId: uId,
-              username: username,
-              accessToken: accessToken,
-              expiredAt: expiredAt);
+            uId: uId,
+            username: username,
+            email: email,
+            accessToken: accessToken,
+            expiredAt: expiredAt,
+          );
 
           return LoginSuccess(
               credential: credential); // Return the credential object);

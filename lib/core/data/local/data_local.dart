@@ -37,7 +37,7 @@ class SQLite {
     try {
       final Database database = await openDatabase(
         path,
-        version: 1,
+        version: 2, // Tăng phiên bản từ 1 lên 2
         onCreate: _onCreate,
         onUpgrade: _onUpgrade,
       );
@@ -53,7 +53,7 @@ class SQLite {
   /// Create database tables on first initialization
   static Future<void> _onCreate(Database database, int version) async {
     const List<String> scripts = [
-      "CREATE TABLE IF NOT EXISTS Session (id INTEGER PRIMARY KEY, uId TEXT, username TEXT, accessToken TEXT, expiredAt TEXT)"
+      "CREATE TABLE IF NOT EXISTS Session (id INTEGER PRIMARY KEY, uId TEXT, username TEXT, email TEXT, accessToken TEXT, expiredAt TEXT)"
     ];
 
     for (final script in scripts) {
@@ -65,14 +65,15 @@ class SQLite {
   static Future<void> _onUpgrade(
       Database database, int oldVersion, int newVersion) async {
     if (oldVersion < 2) {
-      // Add new tables or columns for version 2
-      // Note: accessToken column already exists in the initial schema
+      // Thêm cột email vào bảng Session hiện có
+      await database.execute("ALTER TABLE Session ADD COLUMN email TEXT");
     }
   }
 
   static Future<void> saveSession({
     required String uId,
     required String username,
+    required String email,
     required String accessToken,
     required String expiredAt,
   }) async {
@@ -85,6 +86,7 @@ class SQLite {
         "id": 1, // Using fixed ID 1 to always update the same record
         "uId": uId,
         "username": username,
+        "email": email,
         "accessToken": accessToken,
         "expiredAt": expiredAt,
       },
@@ -93,8 +95,7 @@ class SQLite {
   }
 
   static Future<void> deleteSession() async {
-    final db = await getDatabase(); 
+    final db = await getDatabase();
     db.delete("Session");
-   
   }
 }

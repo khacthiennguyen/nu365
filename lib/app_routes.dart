@@ -55,11 +55,21 @@ GoRouter appRoutes = GoRouter(
             ),
             GoRoute(
               path: '/biometric-settings',
-              builder: (context, state) => BiometricSettings(),
+              builder: (context, state) {
+                final extras = state.extra as Map<String, dynamic>?;
+                final bool biometricEnabled =
+                    extras?['biometricEnabled'] ?? false;
+                return BiometricSettings(biometricEnabled: biometricEnabled);
+              },
             ),
             GoRoute(
               path: '/two-factor-settings',
-              builder: (context, state) => TwoFactorSettings(),
+              builder: (context, state) {
+                final extras = state.extra as Map<String, dynamic>?;
+                final bool twoFactorEnabled =
+                    extras?['twoFactorEnabled'] ?? false;
+                return TwoFactorSettings(twoFactorEnabled: twoFactorEnabled);
+              },
             ),
           ])
     ]);
