@@ -8,6 +8,7 @@ class RuntimeMemoryStorage {
   static void remove(String key) => _data.remove(key);
 
   static void clear() {
+    print("DEBUG: Clearing RuntimeMemoryStorage");
     _data.clear();
     // Optionally, you can also clear the database or perform other cleanup tasks here.
   }
@@ -18,6 +19,7 @@ class RuntimeMemoryStorage {
       required String email,
       required String accessToken,
       required String expiredAt}) {
+    print("DEBUG: Setting session in RuntimeMemoryStorage");
     _data['session'] = {
       'uId': uId,
       'username': username,
@@ -25,5 +27,13 @@ class RuntimeMemoryStorage {
       'accessToken': accessToken,
       'expiredAt': expiredAt
     };
+  }
+
+  static bool hasSession() {
+    return _data.containsKey('session');
+  }
+
+  static Map<String, dynamic>? getSession() {
+    return _data['session'] as Map<String, dynamic>?;
   }
 }

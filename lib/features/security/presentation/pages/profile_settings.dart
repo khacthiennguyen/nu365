@@ -17,7 +17,8 @@ class ProfileSettings extends StatefulWidget {
 class _ProfileSettingsState extends State<ProfileSettings> {
   // Dùng để cập nhật UI mà không cần chờ API
   bool? _latestTwoFactorStatus;
-  bool? _latestBiometricStatus;  @override
+  bool? _latestBiometricStatus;
+  @override
   void initState() {
     super.initState();
     _latestTwoFactorStatus = null;
@@ -59,64 +60,89 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                     widgets: [
                       ListTile(
                         title: const Text("Xác thực 2 yếu tố"),
-                        subtitle: BlocBuilder<SecurityBloc, SecurityState>(                          builder: (context, state) {
+                        subtitle: BlocBuilder<SecurityBloc, SecurityState>(
+                          builder: (context, state) {
                             // Ưu tiên dùng giá trị mới nhất từ kết quả màn hình con nếu có
                             if (_latestTwoFactorStatus != null) {
-                              return Text(_latestTwoFactorStatus! ? "Đang bật" : "Đang tắt");
+                              return Text(_latestTwoFactorStatus!
+                                  ? "Đang bật"
+                                  : "Đang tắt");
                             }
-                            
+
                             // Nếu không có kết quả từ màn hình con, dùng state hoặc bộ nhớ
                             final bool twoFactorEnabled =
                                 (state is SecurityIsLoaded)
                                     ? state.twoFactorEnabled
-                                    : (RuntimeMemoryStorage.get('twoFactorEnabled') ?? false);
+                                    : (RuntimeMemoryStorage.get(
+                                            'twoFactorEnabled') ??
+                                        false);
 
-                            return Text(twoFactorEnabled ? "Đang bật" : "Đang tắt");
+                            return Text(
+                                twoFactorEnabled ? "Đang bật" : "Đang tắt");
                           },
                         ),
-                        trailing: const Icon(Icons.arrow_forward_ios),                        onTap: () async {
+                        trailing: const Icon(Icons.arrow_forward_ios),
+                        onTap: () async {
                           // Sử dụng await để đợi màn hình xác thực 2 yếu tố hoàn thành
-                          final result = await context.push<bool>('/two-factor-settings', extra: {
+                          final result = await context
+                              .push<bool>('/two-factor-settings', extra: {
                             'twoFactorEnabled':
                                 RuntimeMemoryStorage.get('twoFactorEnabled')
                           });
-                          
                           if (result != null) {
                             // Cập nhật UI ngay lập tức với kết quả trả về
                             setState(() {
                               _latestTwoFactorStatus = result;
                             });
                           }
-                          
+
                           // Vẫn refresh từ API để đảm bảo đồng bộ
-                          context.read<SecurityBloc>().add(TakeStatusSecurityEventSendToken());
+                          if (context.mounted) {
+                            try {
+                              context
+                                  .read<SecurityBloc>()
+                                  .add(TakeStatusSecurityEventSendToken());
+                            } catch (e) {
+                              // Ignore if the SecurityBloc is not available
+                              print(
+                                  "SecurityBloc not available when returning from Two Factor Settings: $e");
+                            }
+                          }
                         },
                       ),
                       const SizedBox(height: 12),
                       ListTile(
                         title: const Text("Xác thực sinh trắc học"),
                         trailing: const Icon(Icons.arrow_forward_ios),
-                        subtitle: BlocBuilder<SecurityBloc, SecurityState>(                          builder: (context, state) {
+                        subtitle: BlocBuilder<SecurityBloc, SecurityState>(
+                          builder: (context, state) {
                             // Ưu tiên dùng giá trị mới nhất từ kết quả màn hình con nếu có
                             if (_latestBiometricStatus != null) {
-                              return Text(_latestBiometricStatus! ? "Đang bật" : "Đang tắt");
+                              return Text(_latestBiometricStatus!
+                                  ? "Đang bật"
+                                  : "Đang tắt");
                             }
-                            
+
                             // Nếu không có kết quả từ màn hình con, dùng state hoặc bộ nhớ
                             final bool biometricEnabled =
                                 (state is SecurityIsLoaded)
                                     ? state.biometricEnabled
-                                    : (RuntimeMemoryStorage.get('biometricEnabled') ?? false);
+                                    : (RuntimeMemoryStorage.get(
+                                            'biometricEnabled') ??
+                                        false);
 
-                            return Text(biometricEnabled ? "Đang bật" : "Đang tắt");
+                            return Text(
+                                biometricEnabled ? "Đang bật" : "Đang tắt");
                           },
-                        ),                        onTap: () async {
+                        ),
+                        onTap: () async {
                           // Sử dụng await để đợi màn hình xác thực sinh trắc học hoàn thành
-                          final result = await context.push<bool>('/biometric-settings', extra: {
+                          final result = await context
+                              .push<bool>('/biometric-settings', extra: {
                             'biometricEnabled':
                                 RuntimeMemoryStorage.get('biometricEnabled')
                           });
-                          
+
                           if (result != null) {
                             // Cập nhật UI ngay lập tức với kết quả trả về
                             setState(() {
@@ -125,7 +151,17 @@ class _ProfileSettingsState extends State<ProfileSettings> {
                           }
 
                           // Vẫn refresh từ API để đảm bảo đồng bộ
-                          context.read<SecurityBloc>().add(TakeStatusSecurityEventSendToken());
+                          if (context.mounted) {
+                            try {
+                              context
+                                  .read<SecurityBloc>()
+                                  .add(TakeStatusSecurityEventSendToken());
+                            } catch (e) {
+                              // Ignore if the SecurityBloc is not available
+                              print(
+                                  "SecurityBloc not available when returning from Biometric Settings: $e");
+                            }
+                          }
                         },
                       ),
                     ],

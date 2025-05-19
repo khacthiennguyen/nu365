@@ -4,12 +4,29 @@ import 'package:dio/dio.dart';
 import 'package:nu365/core/api/dio/dio.dart' show dio;
 import 'package:nu365/core/api/utils/base_response.dart';
 import 'package:nu365/core/data/local/data_local.dart';
+import 'package:nu365/core/data/local/data_security.dart';
 import 'package:nu365/core/data/runtime/runtime_memory_storage.dart';
 import 'package:nu365/features/auth/logic/login_state.dart';
 import 'package:nu365/features/auth/logic/register_state.dart';
 import 'package:nu365/features/auth/models/credentail.dart';
 
 class AuthenticateService {
+  // Kiểm tra và khôi phục trạng thái biometric nếu có
+  static Future<void> _restoreBiometricStatusIfNeeded(String userId) async {
+    try {
+      final DataSecurity dataSecurity = DataSecurity();
+      final bool biometricStatus = await dataSecurity.getBiometricStatus();
+      final String? storedUserId = await dataSecurity.getBiometricUserId();
+
+      // Nếu có trạng thái biometric và userId khớp, thì cập nhật lại RuntimeMemoryStorage
+      if (biometricStatus && storedUserId == userId) {
+        RuntimeMemoryStorage.set('biometricEnabled', true);
+      }
+    } catch (e) {
+      print('Error restoring biometric status: $e');
+    }
+  }
+
   static Future<LoginState> login(String email, String password) async {
     try {
       BaseResponse response = BaseResponse.fromDIOResponse(await dio
@@ -26,20 +43,26 @@ class AuthenticateService {
           String username = credential.user.name;
           String email = credential.user.email;
           String accessToken = credential.session.accessToken;
-
           // Convert Unix timestamp (seconds) to DateTime and then to ISO string format
           DateTime expiredDateTime = DateTime.fromMillisecondsSinceEpoch(
               credential.session.expiresAt *
                   1000); // Convert seconds to milliseconds
-          String expiredAt = expiredDateTime.toIso8601String();
+          String expiredAt = expiredDateTime
+              .toIso8601String(); // print("full ifo: $uId, $username, $accessToken, $expiredAt");
+          print("DEBUG: Saving session after successful login");
+          try {
+            await SQLite.saveSession(
+                uId: uId,
+                username: username,
+                email: email,
+                accessToken: accessToken,
+                expiredAt: expiredAt);
+            print("DEBUG: Session saved to SQLite successfully");
+          } catch (dbError) {
+            print("DEBUG: Error saving session to SQLite: $dbError");
+            // Continue even if SQLite save fails, as we still have in-memory session
+          }
 
-          // print("full ifo: $uId, $username, $accessToken, $expiredAt");
-          await SQLite.saveSession(
-              uId: uId,
-              username: username,
-              email: email,
-              accessToken: accessToken,
-              expiredAt: expiredAt);
           // Save user information to local storage
           RuntimeMemoryStorage.setSession(
               uId: uId,
@@ -47,6 +70,10 @@ class AuthenticateService {
               email: email,
               accessToken: accessToken,
               expiredAt: expiredAt);
+          print("DEBUG: Session saved to RuntimeMemoryStorage");
+
+          // Khôi phục trạng thái biometric nếu có
+          await _restoreBiometricStatusIfNeeded(uId);
 
           return LoginSuccess(
               credential: credential); // Return the credential object);
@@ -196,6 +223,9 @@ class AuthenticateService {
             accessToken: accessToken,
             expiredAt: expiredAt,
           );
+
+          // Khôi phục trạng thái biometric nếu có
+          await _restoreBiometricStatusIfNeeded(uId);
 
           return LoginSuccess(
               credential: credential); // Return the credential object);

@@ -1,14 +1,16 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:nu365/features/security/logic/security_event.dart';
 import 'package:nu365/features/security/logic/security_state.dart';
-import 'package:nu365/features/security/services/sercurity_services.dart';
+import 'package:nu365/features/security/services/two_factor_services.dart';
 
 class SecurityBloc extends Bloc<SecurityEvent, SecurityState> {
   SecurityBloc() : super(SecurityInitial()) {
+    
     on<TakeStatusSecurityEventSendToken>((event, emit) async {
       emit(SecutiryIsLoading());
       emit(await SercurityServices.getSecurityStatus());
     });
+
     on<ToggleTwoFactorEvent>((event, emit) async {
       emit(SecutiryIsLoading());
       final result = await SercurityServices.toggleTwoFactor(

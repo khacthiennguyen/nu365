@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.example.nu365.app-mergeDebugResources-48:/values-port/values-port.xml",
+            "outputFile": "com.example.nu365.app-mergeDebugResources-49:/values-port/values-port.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\khact\\.gradle\\caches\\8.10.2\\transforms\\845d779a6f9703b804f5e43452bcc2e5\\transformed\\appcompat-1.1.0\\res\\values-port\\values-port.xml",
+                    "source": "C:\\Users\\khact\\.gradle\\caches\\8.10.2\\transforms\\da6487a86e9e9db92ecb1581849ef609\\transformed\\appcompat-1.2.0\\res\\values-port\\values-port.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

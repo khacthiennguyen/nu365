@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:nu365/core/pages/home.dart';
 import 'package:nu365/features/auth/presentation/pages/otp_screen.dart';
@@ -7,6 +8,7 @@ import 'package:nu365/features/history/presention/pages/history_screen.dart';
 import 'package:nu365/features/manage_main_layout/presentation/pages/main_layout.dart';
 import 'package:nu365/features/profile/presentation/pages/persional_infomation.dart';
 import 'package:nu365/features/profile/presentation/pages/profile_screen.dart';
+import 'package:nu365/features/security/logic/security_bloc.dart';
 import 'package:nu365/features/security/presentation/pages/biometric_settings.dart';
 import 'package:nu365/features/security/presentation/pages/profile_settings.dart';
 import 'package:nu365/features/scan/presentation/pages/scan_screen_wrapper.dart';
@@ -51,7 +53,10 @@ GoRouter appRoutes = GoRouter(
             ),
             GoRoute(
               path: '/profile-settings',
-              builder: (context, state) => ProfileSettings(),
+              builder: (context, state) => BlocProvider(
+                create: (context) => SecurityBloc(),
+                child: ProfileSettings(),
+              ),
             ),
             GoRoute(
               path: '/biometric-settings',
