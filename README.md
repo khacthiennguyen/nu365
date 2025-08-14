@@ -3,8 +3,6 @@
   <img src="nu365-cap/app_logo.png" alt="nu365 App Logo" width="140" />
 </div>
 
-# nu365
-
 **nu365** is a Flutter application that recognizes 12 popular food types from images and estimates their nutritional values (for reference only, not 100% accurate). The app helps users track their diet and raise awareness about daily nutrition.
 
 ## Recognizable Food Types
