@@ -70,14 +70,14 @@ class AppTheme {
         borderSide: const BorderSide(color: primaryPurple),
       ),
     ),
-    cardTheme: CardTheme(
+    cardTheme: CardThemeData(
       color: cardBackground,
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16),
       ),
     ),
-    tabBarTheme: const TabBarTheme(
+    tabBarTheme: const TabBarThemeData(
       labelColor: primaryPurple,
       unselectedLabelColor: textSecondary,
       indicatorSize: TabBarIndicatorSize.tab,
