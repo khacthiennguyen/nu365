@@ -8,6 +8,7 @@
 .pub-cache/
 .pub/
 /build/
+.env
 *.env
 # IDE specific
 **/*.iml
