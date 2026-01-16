@@ -10,6 +10,10 @@
 /build/
 .env
 *.env
+
+# macOS specific
+.DS_Store
+**/.DS_Store
 # IDE specific
 **/*.iml
 **/.idea/
